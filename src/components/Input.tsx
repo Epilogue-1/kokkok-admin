@@ -1,4 +1,4 @@
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {}
+interface Props extends React.ComponentPropsWithoutRef<"input"> {}
 
 export default function Input({ className, ...props }: Props) {
   return (
