@@ -4,7 +4,7 @@ interface Props {
   content: string;
 }
 
-export default function SortDropdown({ content }: Props) {
+export default function Dropdown({ content }: Props) {
   return (
     <div className="flex h-9 w-[120px] items-center rounded-lg border border-gray-300 bg-white pr-3 pl-4">
       <span className="grow">{content}</span>
