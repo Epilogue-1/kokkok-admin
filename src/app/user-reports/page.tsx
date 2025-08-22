@@ -8,7 +8,8 @@ import UserReportTable from "@/features/UserReportTable";
 export default function UserReports() {
   return (
     <>
-      <Header />
+      <Header currentNav="사용자 신고" />
+
       <main className="mx-auto w-full max-w-[1240px] px-5 pt-5 pb-[60px]">
         <Title>사용자 신고</Title>
 

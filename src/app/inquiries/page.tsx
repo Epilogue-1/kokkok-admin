@@ -8,7 +8,8 @@ import InquiryTable from "@/features/InquiryTable";
 export default function Inquiries() {
   return (
     <>
-      <Header />
+      <Header currentNav="문의" />
+
       <main className="mx-auto w-full max-w-[1240px] px-5 pt-5 pb-[60px]">
         <Title>문의</Title>
 

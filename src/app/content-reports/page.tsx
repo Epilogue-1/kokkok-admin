@@ -8,7 +8,8 @@ import ContentReportTable from "@/features/ContentReportTable";
 export default function ContentReports() {
   return (
     <>
-      <Header />
+      <Header currentNav="게시글/댓글 신고" />
+
       <main className="mx-auto w-full max-w-[1240px] px-5 pt-5 pb-[60px]">
         <Title>게시글/댓글 신고</Title>
 
