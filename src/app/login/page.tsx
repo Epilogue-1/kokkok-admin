@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { TbAlertCircleFilled } from "react-icons/tb";
+import Button from "@/components/Button";
 import Input from "@/components/Input";
 
 export default function Login() {
@@ -33,12 +34,11 @@ export default function Login() {
             <Input id="password" placeholder="비밀번호를 입력해주세요" />
           </div>
 
-          <button
-            className="mt-8 flex h-14 items-center justify-center rounded-md bg-primary-600 font-semibold text-white"
-            type="submit"
-          >
-            로그인
-          </button>
+          <div className="mt-8">
+            <Button size="large" type="submit">
+              로그인
+            </Button>
+          </div>
         </form>
 
         {/* 로그인 실패 알림 */}
