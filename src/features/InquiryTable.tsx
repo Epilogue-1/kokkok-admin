@@ -7,14 +7,14 @@ import {
   TableRowItem,
 } from "@/components/Table";
 
-interface Report {
+interface Inquiry {
   type: "오류제보" | "계정문의" | "기능제안" | "기타";
   content: string;
   createdDate: string;
   status: "-" | "무시" | "진행중" | "완료";
 }
 
-const REPORTS: Report[] = [
+const INQUIRIES: Inquiry[] = [
   {
     type: "기능제안",
     content: "운동을 할 때마다 응원의 메세지가 음성으로 나왔으면 좋겠어요.",
@@ -135,23 +135,23 @@ export default function InquiryTable() {
 
       {/* 표 내용 */}
       <TableBody>
-        {REPORTS.map((report, index) => (
+        {INQUIRIES.map((inquiry, index) => (
           <TableRow key={index}>
             <TableRowItem
               className="max-w-[100px] text-center"
-              content={report.type}
+              content={inquiry.type}
             />
             <TableRowItem
               className="line-clamp-1 whitespace-pre-wrap text-left"
-              content={report.content}
+              content={inquiry.content}
             />
             <TableRowItem
               className="max-w-[150px] text-center"
-              content={report.createdDate}
+              content={inquiry.createdDate}
             />
             <TableRowItem
               className="max-w-[100px] text-center"
-              content={report.status}
+              content={inquiry.status}
             />
           </TableRow>
         ))}
