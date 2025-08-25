@@ -25,7 +25,7 @@ export default function Inquiries() {
           <Dropdown content="최신순" />
         </div>
 
-        {/* 신고 목록 테이블 */}
+        {/* 문의 목록 테이블 */}
         <div className="mt-4">
           <InquiryTable />
         </div>

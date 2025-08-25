@@ -25,7 +25,7 @@ export default function ContentReports() {
           <Dropdown content="최신순" />
         </div>
 
-        {/* 신고 목록 테이블 */}
+        {/* 게시글/댓글 신고 목록 테이블 */}
         <div className="mt-4">
           <ContentReportTable />
         </div>

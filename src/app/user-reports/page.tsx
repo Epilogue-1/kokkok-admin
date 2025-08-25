@@ -21,7 +21,7 @@ export default function UserReports() {
           <Dropdown content="최신순" />
         </div>
 
-        {/* 신고 목록 테이블 */}
+        {/* 사용자 신고 목록 테이블 */}
         <div className="mt-4">
           <UserReportTable />
         </div>
