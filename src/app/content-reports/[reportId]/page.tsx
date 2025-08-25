@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import SubTitle from "@/components/SubTitle";
 import Title from "@/components/Title";
 import CommentCard from "@/features/CommentCard";
+import PostCard from "@/features/PostCard";
 import ProcessForm from "@/features/ProcessForm";
 import TimelineMemo from "@/features/TimelineMemo";
 import TimelineNewReport from "@/features/TimelineNewReport";
@@ -84,7 +85,7 @@ const REPORTS_2: Report[] = [
 ];
 
 export default function ContentReportDetail() {
-  const contentType: "게시글" | "댓글" = "댓글";
+  const contentType: "게시글" | "댓글" = "게시글";
 
   const isRestricted = true;
 
@@ -107,7 +108,13 @@ export default function ContentReportDetail() {
         <div className="flex flex-col gap-10">
           {/* 게시글/댓글 내용 */}
           {contentType === "게시글" ? (
-            <div>게시글 카드</div>
+            <PostCard
+              authorAvatarSrc="/tmp/profile_avatar.jpg"
+              author="이승헌 (heony704@gmail.com)"
+              createdDate="2025년 1월 2일"
+              imagesSrc={["/tmp/post_image.webp"]}
+              content={`뭐라 써야할지 모르겠다 하여튼간에 신고당할만한 내용 미친 어그로입니다.\n아래 신고 이력에 있는 신고 내용은 생각해내기 힘들어서 챗지피티한테 도움받았어요. 인터넷 많이 사용하는 사람처럼 써달라고 했는데 노잼..\n\n더위를 이기는 자신만의 방법이 있나요?\n근데 비 오기 전에 몇주전엔 정말 덥긴 했어요. 땡볕에 돌아다니는데 힘들긴 하더라구요. 저녁에 해 지고 뛰는데도 너무 더워서 미치는 줄 알았어요. 항상 홍익인간이 됩니다. 집에 가면 동생이 괜찮냐고 물어봐요. 저는 러닝할 때 통풍 잘되는 러닝화에다가 운동양말을 신는데요. (운동양말 신어야 발을 딱 잡아줘서..) 운동양말이 두꺼워서 그런가 1키로만 뛰어도 발에서 불이나요. 몸에 걸친게 없어야 편한 저로서는 고역이 따로 없습니다. 다들 이러신지..`}
+            />
           ) : (
             <CommentCard
               authorAvatarSrc="/tmp/profile_avatar.jpg"
@@ -126,7 +133,7 @@ export default function ContentReportDetail() {
               <TimelineMemo
                 author="이승헌"
                 createdDate="2025년 7월 22일"
-                memo={`이상한 댓글 아니에요!!!!\n안녕하세요 :)`}
+                memo={`이상한 글 아니에요!!!!\n안녕하세요 :)`}
               />
               <TimelineReportDismiss
                 author="이승헌"
