@@ -1,5 +1,6 @@
 import Badge from "@/components/Badge";
 import Header from "@/components/Header";
+import Main from "@/components/Main";
 import Pagination from "@/components/Pagination";
 import SubTitle from "@/components/SubTitle";
 import Title from "@/components/Title";
@@ -96,7 +97,7 @@ export default function UserReportDetail() {
     <>
       <Header currentNav="사용자 신고" />
 
-      <main className="mx-auto flex w-full max-w-[1240px] flex-col px-5 pt-5 pb-[60px]">
+      <Main>
         <div className="flex items-center justify-between">
           <Title>사용자 신고</Title>
 
@@ -192,7 +193,7 @@ export default function UserReportDetail() {
             <ProcessForm />
           </section>
         </div>
-      </main>
+      </Main>
     </>
   );
 }

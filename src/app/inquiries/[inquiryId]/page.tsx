@@ -1,5 +1,6 @@
 import Badge from "@/components/Badge";
 import Header from "@/components/Header";
+import Main from "@/components/Main";
 import SubTitle from "@/components/SubTitle";
 import Title from "@/components/Title";
 import InquiryCard from "@/features/InquiryCard";
@@ -12,7 +13,7 @@ export default function InquiryDetail() {
     <>
       <Header currentNav="문의" />
 
-      <main className="mx-auto w-full max-w-[1240px] px-5 pt-5 pb-[60px]">
+      <Main>
         <div className="flex items-end justify-between">
           <Title>문의</Title>
 
@@ -71,7 +72,7 @@ export default function InquiryDetail() {
             <ProcessForm />
           </section>
         </div>
-      </main>
+      </Main>
     </>
   );
 }

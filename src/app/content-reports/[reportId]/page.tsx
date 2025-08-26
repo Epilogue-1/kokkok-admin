@@ -1,5 +1,6 @@
 import Badge from "@/components/Badge";
 import Header from "@/components/Header";
+import Main from "@/components/Main";
 import SubTitle from "@/components/SubTitle";
 import Title from "@/components/Title";
 import CommentCard from "@/features/CommentCard";
@@ -93,7 +94,7 @@ export default function ContentReportDetail() {
     <>
       <Header currentNav="게시글/댓글 신고" />
 
-      <main className="mx-auto w-full max-w-[1240px] px-5 pt-5 pb-[60px]">
+      <Main>
         <div className="flex items-center justify-between">
           <Title>
             {contentType === "게시글" ? "게시글 신고" : "댓글 신고"}
@@ -156,7 +157,7 @@ export default function ContentReportDetail() {
             <ProcessForm />
           </section>
         </div>
-      </main>
+      </Main>
     </>
   );
 }

@@ -1,6 +1,7 @@
 import Dropdown from "@/components/Dropdown";
 import Filter from "@/components/Filter";
 import Header from "@/components/Header";
+import Main from "@/components/Main";
 import Pagination from "@/components/Pagination";
 import Title from "@/components/Title";
 import InquiryTable from "@/features/InquiryTable";
@@ -10,7 +11,7 @@ export default function Inquiries() {
     <>
       <Header currentNav="문의" />
 
-      <main className="mx-auto w-full max-w-[1240px] px-5 pt-5 pb-[60px]">
+      <Main>
         <Title>문의</Title>
 
         <div className="flex items-end justify-between">
@@ -34,7 +35,7 @@ export default function Inquiries() {
         <div className="mt-4 flex w-full justify-center">
           <Pagination />
         </div>
-      </main>
+      </Main>
     </>
   );
 }

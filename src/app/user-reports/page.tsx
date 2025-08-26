@@ -1,6 +1,7 @@
 import Dropdown from "@/components/Dropdown";
 import Filter from "@/components/Filter";
 import Header from "@/components/Header";
+import Main from "@/components/Main";
 import Pagination from "@/components/Pagination";
 import Title from "@/components/Title";
 import UserReportTable from "@/features/UserReportTable";
@@ -10,7 +11,7 @@ export default function UserReports() {
     <>
       <Header currentNav="사용자 신고" />
 
-      <main className="mx-auto w-full max-w-[1240px] px-5 pt-5 pb-[60px]">
+      <Main>
         <Title>사용자 신고</Title>
 
         <div className="flex items-end justify-between">
@@ -30,7 +31,7 @@ export default function UserReports() {
         <div className="mt-4 flex w-full justify-center">
           <Pagination />
         </div>
-      </main>
+      </Main>
     </>
   );
 }
