@@ -8,7 +8,7 @@ interface Nav {
   href: string;
 }
 interface Props {
-  currentNav: NavName;
+  currentNav?: NavName;
 }
 
 export default function Header({ currentNav }: Props) {

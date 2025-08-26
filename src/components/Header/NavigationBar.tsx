@@ -2,7 +2,7 @@ import Link from "next/link";
 
 interface Props<NavName extends string> {
   allNav: { name: NavName; href: string }[];
-  currentNav: NavName;
+  currentNav?: NavName;
 }
 
 export default function NavigationBar<T extends string>({
