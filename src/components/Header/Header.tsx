@@ -1,12 +1,32 @@
 import Image from "next/image";
 import { TbLogout } from "react-icons/tb";
-import NavigationBar, { type NavMenuName } from "./NavigationBar";
+import NavigationBar from "./NavigationBar";
 
+type NavName = "사용자 신고" | "게시글/댓글 신고" | "문의";
+interface Nav {
+  name: NavName;
+  href: string;
+}
 interface Props {
-  currentNav: NavMenuName;
+  currentNav: NavName;
 }
 
 export default function Header({ currentNav }: Props) {
+  const navs: Nav[] = [
+    {
+      name: "사용자 신고",
+      href: "/user-reports",
+    },
+    {
+      name: "게시글/댓글 신고",
+      href: "/content-reports",
+    },
+    {
+      name: "문의",
+      href: "/inquiries",
+    },
+  ];
+
   return (
     <header className="flex h-14 justify-center border-gray-300 border-b">
       <div className="flex h-full w-full max-w-[1240px] items-center gap-10 px-5">
@@ -20,7 +40,7 @@ export default function Header({ currentNav }: Props) {
         />
 
         {/* 네비게이션 메뉴 */}
-        <NavigationBar currentNav={currentNav} />
+        <NavigationBar allNav={navs} currentNav={currentNav} />
 
         {/* 사용자 메뉴 */}
         <div className="flex items-center gap-5">
