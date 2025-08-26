@@ -11,10 +11,11 @@ export default function Carousel({ imagesSrc }: Props) {
       <div className="flex items-center gap-8">
         {/* 이전 버튼 */}
         <button
-          className="flex h-9 w-9 items-center justify-center rounded-lg"
+          className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg text-gray-600 transition-colors hover:bg-gray-100 active:bg-gray-200 disabled:pointer-events-none disabled:text-gray-300"
+          disabled
           type="button"
         >
-          <TbChevronLeft className="h-8 w-8 text-gray-300" />
+          <TbChevronLeft className="h-8 w-8" />
         </button>
 
         {/* 사진들 */}
@@ -28,10 +29,10 @@ export default function Carousel({ imagesSrc }: Props) {
 
         {/* 다음 버튼 */}
         <button
-          className="flex h-9 w-9 items-center justify-center rounded-lg"
+          className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg text-gray-600 transition-colors hover:bg-gray-100 active:bg-gray-200 disabled:pointer-events-none disabled:text-gray-300"
           type="button"
         >
-          <TbChevronRight className="h-8 w-8 text-gray-600" />
+          <TbChevronRight className="h-8 w-8" />
         </button>
       </div>
 

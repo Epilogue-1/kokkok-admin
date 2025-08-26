@@ -9,7 +9,7 @@ export default function ProcessForm() {
 
       {/* 메모 입력란 */}
       <textarea
-        className="h-[100px] resize-none rounded-lg border border-gray-300 px-4 py-3 placeholder:text-gray-400"
+        className="h-[100px] resize-none rounded-lg border border-gray-300 px-4 py-3 placeholder:text-gray-400 focus:border-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-600"
         placeholder="메모를 남겨주세요. (선택)"
       />
 

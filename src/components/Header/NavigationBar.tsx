@@ -11,6 +11,7 @@ interface Props {
 }
 
 export default function NavigationBar({ currentNav }: Props) {
+  // TODO: menu 위치를 상단 컴포넌트인 Header로 옮기기 (NavigationBar에서 allNav로 받기)
   const menus: NavMenu[] = [
     {
       name: "사용자 신고",
@@ -34,8 +35,10 @@ export default function NavigationBar({ currentNav }: Props) {
             <Link
               // 네비게이션 메뉴 중 현재 메뉴(currentNav) 강조
               className={`${
-                currentNav === menu.name ? "font-bold text-primary-600" : ""
-              } flex h-8 items-center justify-center px-4`}
+                currentNav === menu.name
+                  ? "font-bold text-primary-600"
+                  : "text-black"
+              } flex h-8 cursor-pointer items-center justify-center rounded-lg px-4 transition-colors hover:bg-gray-100 active:bg-gray-200`}
               href={menu.href}
             >
               {menu.name}

@@ -8,7 +8,7 @@ export default function Filter({ items }: Props) {
       {items.map((item) => (
         <div
           key={item}
-          className="flex h-8 items-center rounded-[10px] bg-primary-600 px-4 text-white"
+          className="flex h-8 cursor-pointer items-center rounded-[10px] bg-primary-600 px-4 text-white transition-colors hover:bg-primary-700 active:bg-primary-800"
         >
           <span className="font-medium">{item}</span>
         </div>

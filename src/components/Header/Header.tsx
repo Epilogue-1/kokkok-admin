@@ -26,7 +26,10 @@ export default function Header({ currentNav }: Props) {
         <div className="flex items-center gap-5">
           <span className="text-sm">이승헌</span>
           <div className="h-4 w-[1px] bg-gray-300" />
-          <button className="h-8 w-8" type="button">
+          <button
+            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-md transition-colors hover:bg-gray-100 active:bg-gray-200"
+            type="button"
+          >
             <TbLogout className="text-xl" />
           </button>
         </div>
