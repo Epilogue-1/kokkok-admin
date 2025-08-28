@@ -1,8 +1,8 @@
-import Dropdown from "@/components/Dropdown";
 import Filter from "@/components/Filter";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
 import Pagination from "@/components/Pagination";
+import SortDropdown from "@/components/SortDropdown";
 import Title from "@/components/Title";
 import UserReportTable from "@/features/UserReportTable";
 
@@ -31,7 +31,13 @@ export default async function UserReports(props: PageProps<"/user-reports">) {
           />
 
           {/* 정렬 드롭다운 */}
-          <Dropdown content="최신순" />
+          <SortDropdown
+            items={[
+              { label: "최신순", value: "latest" },
+              { label: "오래된순", value: "oldest" },
+              { label: "신고 많은순", value: "most" },
+            ]}
+          />
         </div>
 
         {/* 사용자 신고 목록 테이블 */}

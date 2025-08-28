@@ -1,11 +1,18 @@
 import Button from "@/components/Button";
-import Dropdown from "@/components/Dropdown";
+import SortDropdown from "@/components/SortDropdown";
 
 export default function ProcessForm() {
   return (
     <form className="flex flex-col gap-3 rounded-xl border border-gray-300 p-3">
       {/* 처리 유형 선택 */}
-      <Dropdown content="메모" />
+      {/* TODO: 임시! select로 바꿀 것 */}
+      <SortDropdown
+        items={[
+          { label: "메모", value: "memo" },
+          { label: "기각", value: "dismiss" },
+          { label: "제한", value: "restricted" },
+        ]}
+      />
 
       {/* 메모 입력란 */}
       <textarea
