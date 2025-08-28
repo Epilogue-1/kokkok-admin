@@ -1,7 +1,6 @@
 import IndicatorLink from "./IndicatorLink";
 import PageLink from "./PageLink";
 
-type SearchParams = Record<string, string | string[] | undefined>;
 interface Props {
   query: SearchParams;
   total: number;

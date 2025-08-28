@@ -1,7 +1,6 @@
 import { asArray } from "@/utils/array";
 import FilterItem from "./FilterItem";
 
-type SearchParams = Record<string, string | string[] | undefined>;
 interface Props {
   query: SearchParams;
   queryKey: string;
