@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { asArray } from "@/utils/array";
+import FilterItem from "./FilterItem";
 
 type SearchParams = Record<string, string | string[] | undefined>;
 interface Props {
@@ -9,12 +9,6 @@ interface Props {
 }
 
 export default function Filter({ query, queryKey, items }: Props) {
-  // 활성화/비활성화 스타일
-  const activeItemStyle =
-    "border border-primary-600 bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800";
-  const inactiveItemStyle =
-    "border border-gray-300 bg-white text-gray-600 hover:bg-gray-100 active:bg-gray-200";
-
   const activeValues = asArray(query?.[queryKey]);
   const isAllActive = activeValues.length === 0;
   const isValueActive = (value: string) =>
@@ -64,18 +58,15 @@ export default function Filter({ query, queryKey, items }: Props) {
   return (
     <div className="flex gap-2">
       {items.map((item, index) => (
-        <Link
+        <FilterItem
           key={`${item.value} ${index}`}
+          active={isValueActive(item.value)}
           href={{
             query: createNextQuery(item.value),
           }}
-          // 활성화된 item이라면 강조
-          className={`${
-            isValueActive(item.value) ? activeItemStyle : inactiveItemStyle
-          } flex h-8 cursor-pointer items-center rounded-lg px-4 transition-colors`}
         >
-          <span className="font-medium">{item.label}</span>
-        </Link>
+          {item.label}
+        </FilterItem>
       ))}
     </div>
   );
