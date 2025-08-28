@@ -6,7 +6,9 @@ import Pagination from "@/components/Pagination";
 import Title from "@/components/Title";
 import UserReportTable from "@/features/UserReportTable";
 
-export default function UserReports() {
+export default async function UserReports(props: PageProps<"/user-reports">) {
+  const query = await props.searchParams;
+
   return (
     <>
       <Header currentNav="사용자 신고" />
@@ -16,7 +18,15 @@ export default function UserReports() {
 
         <div className="flex items-end justify-between">
           {/* 필터 */}
-          <Filter items={["-", "기각", "퇴출"]} />
+          <Filter
+            query={query}
+            queryKey="status"
+            items={[
+              { label: "-", value: "none" },
+              { label: "기각", value: "dismiss" },
+              { label: "퇴출", value: "ban" },
+            ]}
+          />
 
           {/* 정렬 드롭다운 */}
           <Dropdown content="최신순" />

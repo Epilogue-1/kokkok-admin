@@ -6,7 +6,9 @@ import Pagination from "@/components/Pagination";
 import Title from "@/components/Title";
 import InquiryTable from "@/features/InquiryTable";
 
-export default function Inquiries() {
+export default async function Inquiries(props: PageProps<"/inquiries">) {
+  const query = await props.searchParams;
+
   return (
     <>
       <Header currentNav="문의" />
@@ -17,9 +19,27 @@ export default function Inquiries() {
         <div className="flex items-end justify-between">
           {/* 필터 */}
           <div className="flex grow items-center gap-5">
-            <Filter items={["오류제보", "계정문의", "기능제안", "기타"]} />
+            <Filter
+              query={query}
+              queryKey="type"
+              items={[
+                { label: "오류제보", value: "error" },
+                { label: "계정문의", value: "account" },
+                { label: "기능제안", value: "feature" },
+                { label: "기타", value: "etc" },
+              ]}
+            />
             <div className="h-5 w-[1px] bg-gray-300" />
-            <Filter items={["-", "무시", "진행중", "완료"]} />
+            <Filter
+              query={query}
+              queryKey="status"
+              items={[
+                { label: "-", value: "none" },
+                { label: "무시", value: "dismiss" },
+                { label: "진행중", value: "processing" },
+                { label: "완료", value: "complete" },
+              ]}
+            />
           </div>
 
           {/* 정렬 드롭다운 */}
