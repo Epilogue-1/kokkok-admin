@@ -9,6 +9,8 @@ import InquiryTable from "@/features/InquiryTable";
 export default async function Inquiries(props: PageProps<"/inquiries">) {
   const query = await props.searchParams;
 
+  const totalPage = 13;
+
   return (
     <>
       <Header currentNav="문의" />
@@ -53,7 +55,7 @@ export default async function Inquiries(props: PageProps<"/inquiries">) {
 
         {/* 페이지네이션 */}
         <div className="mt-4 flex w-full justify-center">
-          <Pagination />
+          <Pagination query={query} total={totalPage} />
         </div>
       </Main>
     </>

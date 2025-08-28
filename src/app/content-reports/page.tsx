@@ -11,6 +11,8 @@ export default async function ContentReports(
 ) {
   const query = await props.searchParams;
 
+  const totalPage = 13;
+
   return (
     <>
       <Header currentNav="게시글/댓글 신고" />
@@ -52,7 +54,7 @@ export default async function ContentReports(
 
         {/* 페이지네이션 */}
         <div className="mt-4 flex w-full justify-center">
-          <Pagination />
+          <Pagination query={query} total={totalPage} />
         </div>
       </Main>
     </>

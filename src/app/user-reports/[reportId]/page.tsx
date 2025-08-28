@@ -88,10 +88,16 @@ const REPORTS_2: Report[] = [
   },
 ];
 
-export default function UserReportDetail() {
+export default async function UserReportDetail(
+  props: PageProps<"/user-reports/[reportId]">,
+) {
+  const query = await props.searchParams;
+
   const isBanned = true;
   const postCount = 34;
   const commentCount = 189;
+
+  const totalPage = 13;
 
   return (
     <>
@@ -143,7 +149,7 @@ export default function UserReportDetail() {
 
               <div className="flex flex-col items-center gap-3">
                 <UserPostTable />
-                <Pagination />
+                <Pagination query={query} total={totalPage} />
               </div>
             </section>
 
@@ -156,7 +162,7 @@ export default function UserReportDetail() {
 
               <div className="flex flex-col items-center gap-3">
                 <UserCommentTable />
-                <Pagination />
+                <Pagination query={query} total={totalPage} />
               </div>
             </section>
           </div>

@@ -9,6 +9,8 @@ import UserReportTable from "@/features/UserReportTable";
 export default async function UserReports(props: PageProps<"/user-reports">) {
   const query = await props.searchParams;
 
+  const totalPage = 13;
+
   return (
     <>
       <Header currentNav="사용자 신고" />
@@ -39,7 +41,7 @@ export default async function UserReports(props: PageProps<"/user-reports">) {
 
         {/* 페이지네이션 */}
         <div className="mt-4 flex w-full justify-center">
-          <Pagination />
+          <Pagination query={query} total={totalPage} />
         </div>
       </Main>
     </>
