@@ -20,7 +20,7 @@ export default function NavigationBar<T extends string>({
                 currentNav === nav.name
                   ? "font-bold text-primary-600"
                   : "text-black"
-              } flex h-8 cursor-pointer items-center justify-center rounded-lg px-4 transition-colors hover:bg-gray-100 active:bg-gray-200`}
+              } flex h-8 cursor-pointer items-center justify-center rounded-lg px-3 transition-colors hover:bg-gray-100 active:bg-gray-200`}
               href={nav.href}
             >
               {nav.name}

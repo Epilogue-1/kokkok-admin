@@ -41,12 +41,12 @@ export default async function UserReports(props: PageProps<"/user-reports">) {
         </div>
 
         {/* 사용자 신고 목록 테이블 */}
-        <div className="mt-4">
+        <div className="mt-2">
           <UserReportTable />
         </div>
 
         {/* 페이지네이션 */}
-        <div className="mt-4 flex w-full justify-center">
+        <div className="mt-3 flex w-full justify-center">
           <Pagination query={query} total={totalPage} />
         </div>
       </Main>

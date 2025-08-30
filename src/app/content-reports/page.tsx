@@ -22,7 +22,7 @@ export default async function ContentReports(
 
         <div className="flex items-end">
           {/* 필터 */}
-          <div className="flex grow items-center gap-5">
+          <div className="flex grow items-center gap-3">
             <Filter
               query={query}
               queryKey="content"
@@ -54,12 +54,12 @@ export default async function ContentReports(
         </div>
 
         {/* 게시글/댓글 신고 목록 테이블 */}
-        <div className="mt-4">
+        <div className="mt-2">
           <ContentReportTable />
         </div>
 
         {/* 페이지네이션 */}
-        <div className="mt-4 flex w-full justify-center">
+        <div className="mt-3 flex w-full justify-center">
           <Pagination query={query} total={totalPage} />
         </div>
       </Main>

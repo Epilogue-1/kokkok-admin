@@ -18,10 +18,10 @@ export default function FilterItem({
     <Link
       className={`${
         active ? activeStyle : inactiveStyle
-      } flex h-8 cursor-pointer items-center rounded-lg px-4 transition-colors`}
+      } flex h-8 cursor-pointer items-center rounded-lg px-3 transition-colors`}
       {...props}
     >
-      <span className="font-medium">{children}</span>
+      <span>{children}</span>
     </Link>
   );
 }

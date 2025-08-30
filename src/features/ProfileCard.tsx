@@ -29,7 +29,7 @@ export default function ProfileCard({
 
       {/* 프로필 아바타 사진 */}
       <Image
-        className="absolute top-20 left-5 rounded-full border-[3px] border-white"
+        className="absolute top-20 left-4 rounded-full border-[3px] border-white"
         src={avatarSrc}
         alt="프로필 아바타"
         height={80}
@@ -37,7 +37,7 @@ export default function ProfileCard({
       />
 
       {/* 사용자 이름 & 소개 */}
-      <div className="flex flex-col gap-2 px-5 pt-12 pb-5">
+      <div className="flex flex-col gap-1 px-4 pt-12 pb-3">
         <span className="font-bold">{name}</span>
         <p className="whitespace-pre-wrap">{introduction}</p>
       </div>

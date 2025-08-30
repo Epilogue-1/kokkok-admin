@@ -54,7 +54,7 @@ export default function SortDropdown({ items }: Props) {
 
   return (
     <DropdownContext.Provider value={context}>
-      <div className="relative w-[130px]" ref={dropdownRef}>
+      <div className="relative w-[120px]" ref={dropdownRef}>
         {/* 트리거 */}
         <Trigger>{currentLabel}</Trigger>
 

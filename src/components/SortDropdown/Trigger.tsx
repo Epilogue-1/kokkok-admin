@@ -11,7 +11,7 @@ export default function Trigger({ children }: Props) {
   // 트리거 클릭 시, 메뉴 열림
   return (
     <button
-      className="flex h-9 w-full cursor-pointer items-center rounded-lg border border-gray-300 bg-white pr-3 pl-4 transition-colors hover:bg-gray-100 active:bg-gray-200"
+      className="flex h-9 w-full cursor-pointer items-center rounded-lg border border-gray-300 bg-white pr-2 pl-3 transition-colors hover:bg-gray-100 active:bg-gray-200"
       type="button"
       onClick={toggle}
     >

@@ -3,7 +3,7 @@ import SortDropdown from "@/components/SortDropdown";
 
 export default function ProcessForm() {
   return (
-    <form className="flex flex-col gap-3 rounded-xl border border-gray-300 p-3">
+    <form className="flex flex-col gap-2 rounded-xl border border-gray-300 p-2">
       {/* 처리 유형 선택 */}
       {/* TODO: 임시! select로 바꿀 것 */}
       <SortDropdown
@@ -16,7 +16,7 @@ export default function ProcessForm() {
 
       {/* 메모 입력란 */}
       <textarea
-        className="h-[100px] resize-none rounded-lg border border-gray-300 px-4 py-3 placeholder:text-gray-400 focus:border-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-600"
+        className="h-[100px] resize-none rounded-lg border border-gray-300 px-3 py-2 placeholder:text-gray-400 focus:border-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-600"
         placeholder="메모를 남겨주세요. (선택)"
       />
 

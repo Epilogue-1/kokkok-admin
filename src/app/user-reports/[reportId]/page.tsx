@@ -109,11 +109,11 @@ export default async function UserReportDetail(
 
           {/* 퇴출된 사용자라면 표시 */}
           {isBanned && (
-            <Badge className="mb-5" variant="destructive" content="퇴출됨" />
+            <Badge className="mb-2" variant="destructive" content="퇴출됨" />
           )}
         </div>
 
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-6">
           <div className="flex w-full gap-8">
             {/* 사용자 프로필 */}
             <section className="flex-1">
@@ -144,7 +144,7 @@ export default async function UserReportDetail(
             <section className="flex-1">
               <div className="flex items-center gap-3">
                 <SubTitle>작성한 게시글</SubTitle>
-                <span className="mb-3 text-primary-600">{postCount}</span>
+                <span className="mb-1 text-primary-600">{postCount}</span>
               </div>
 
               <div className="flex flex-col items-center gap-3">
@@ -157,7 +157,7 @@ export default async function UserReportDetail(
             <section className="flex-1">
               <div className="flex items-center gap-3">
                 <SubTitle>작성한 댓글</SubTitle>
-                <span className="mb-3 text-primary-600">{commentCount}</span>
+                <span className="mb-1 text-primary-600">{commentCount}</span>
               </div>
 
               <div className="flex flex-col items-center gap-3">

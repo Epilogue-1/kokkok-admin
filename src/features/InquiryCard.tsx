@@ -15,7 +15,7 @@ export default function InquiryCard({
   content,
 }: Props) {
   return (
-    <div className="flex flex-col gap-2.5 rounded-2xl border border-gray-300 px-5 py-4">
+    <div className="flex flex-col gap-2.5 rounded-2xl border border-gray-300 px-4 py-3">
       <div className="flex items-center justify-between">
         {/* 문의 타입 */}
         <Badge content={type} />

@@ -102,11 +102,11 @@ export default function ContentReportDetail() {
 
           {/* 제한된 신고라면 표시 */}
           {isRestricted && (
-            <Badge className="mb-5" variant="destructive" content="제한됨" />
+            <Badge className="mb-2" variant="destructive" content="제한됨" />
           )}
         </div>
 
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-6">
           {/* 게시글/댓글 내용 */}
           {contentType === "게시글" ? (
             <PostCard

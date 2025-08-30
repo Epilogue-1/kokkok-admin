@@ -19,14 +19,14 @@ export default function InquiryDetail() {
 
           {/* 문의 상태 */}
           <Badge
-            className="mb-5"
+            className="mb-3"
             variant="outline"
             size="large"
             content="진행중"
           />
         </div>
 
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-6">
           {/* 문의 내용 */}
           <InquiryCard
             type="기능제안"

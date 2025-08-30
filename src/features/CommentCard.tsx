@@ -14,7 +14,7 @@ export default function CommentCard({
   content,
 }: Props) {
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-gray-300 px-5 py-4">
+    <div className="flex flex-col gap-4 rounded-2xl border border-gray-300 px-4 py-3">
       <div className="flex items-center gap-3">
         {/* 댓글 작성자 아바타 */}
         <Image

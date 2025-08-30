@@ -20,7 +20,7 @@ export default async function Inquiries(props: PageProps<"/inquiries">) {
 
         <div className="flex items-end justify-between">
           {/* 필터 */}
-          <div className="flex grow items-center gap-5">
+          <div className="flex grow items-center gap-3">
             <Filter
               query={query}
               queryKey="type"
@@ -55,12 +55,12 @@ export default async function Inquiries(props: PageProps<"/inquiries">) {
         </div>
 
         {/* 문의 목록 테이블 */}
-        <div className="mt-4">
+        <div className="mt-2">
           <InquiryTable />
         </div>
 
         {/* 페이지네이션 */}
-        <div className="mt-4 flex w-full justify-center">
+        <div className="mt-3 flex w-full justify-center">
           <Pagination query={query} total={totalPage} />
         </div>
       </Main>
