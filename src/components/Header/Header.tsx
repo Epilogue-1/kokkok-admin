@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { TbLogout } from "react-icons/tb";
 import NavigationBar from "./NavigationBar";
 
@@ -31,13 +32,15 @@ export default function Header({ currentNav }: Props) {
     <header className="flex h-14 justify-center border-gray-300 border-b">
       <div className="flex h-full w-full max-w-[1240px] items-center gap-10 px-5">
         {/* 콕콕 로고 */}
-        <Image
-          src="/logo.svg"
-          alt="콕콕 로고"
-          width={107}
-          height={24}
-          priority
-        />
+        <Link href={"/"}>
+          <Image
+            src="/logo.svg"
+            alt="콕콕 로고"
+            width={107}
+            height={24}
+            priority
+          />
+        </Link>
 
         {/* 네비게이션 메뉴 */}
         <NavigationBar allNav={navs} currentNav={currentNav} />
