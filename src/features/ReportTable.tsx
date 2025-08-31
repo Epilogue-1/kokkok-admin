@@ -49,7 +49,7 @@ export default function ReportTable({ reports }: Props) {
               content={report.content}
             />
             <TableRowItem
-              className="max-w-[160px] text-center"
+              className="max-w-[160px] break-all text-center"
               content={report.writerEmail}
             />
             <TableRowItem

@@ -187,12 +187,20 @@ export default function ContentReportTable() {
               className="max-w-[60px] text-center"
               content={report.type}
             />
+            {/* 게시글 글 내용이 없다면 (없음) 이라고 표시 */}
+            {report.content.length > 0 ? (
+              <TableRowItem
+                className="line-clamp-1 whitespace-pre-wrap text-left"
+                content={report.content}
+              />
+            ) : (
+              <TableRowItem
+                className="text-left text-gray-400"
+                content="(없음)"
+              />
+            )}
             <TableRowItem
-              className="line-clamp-1 whitespace-pre-wrap text-left"
-              content={report.content}
-            />
-            <TableRowItem
-              className="max-w-[150px] text-center"
+              className="max-w-[150px] truncate text-center"
               content={`${report.writerName} (${report.writerEmail})`}
             />
             <TableRowItem

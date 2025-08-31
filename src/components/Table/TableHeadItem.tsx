@@ -4,5 +4,5 @@ interface Props {
 }
 
 export default function TableHeadItem({ className = "", content }: Props) {
-  return <th className={`${className} w-full`}>{content}</th>;
+  return <th className={`${className} w-full leading-tight`}>{content}</th>;
 }

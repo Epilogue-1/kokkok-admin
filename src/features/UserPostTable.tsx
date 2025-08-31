@@ -64,10 +64,18 @@ export default function UserPostTable() {
       <TableBody>
         {POSTS.map((post, index) => (
           <TableRow key={index}>
-            <TableRowItem
-              className="line-clamp-1 whitespace-pre-wrap text-left"
-              content={`${post.content}`}
-            />
+            {/* 게시글 글 내용이 없다면 (없음) 이라고 표시 */}
+            {post.content.length > 0 ? (
+              <TableRowItem
+                className="line-clamp-1 whitespace-pre-wrap text-left"
+                content={`${post.content}`}
+              />
+            ) : (
+              <TableRowItem
+                className="text-left text-gray-400"
+                content="(없음)"
+              />
+            )}
             <TableRowItem
               className="max-w-[130px] text-center"
               content={post.createdDate}

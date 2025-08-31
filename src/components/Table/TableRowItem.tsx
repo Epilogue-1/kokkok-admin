@@ -4,11 +4,5 @@ interface Props {
 }
 
 export default function TableRowItem({ className = "", content }: Props) {
-  if (content.length <= 0) {
-    return (
-      <td className={`${className} w-full truncate text-gray-400`}>(없음)</td>
-    );
-  }
-
-  return <td className={`${className} w-full truncate`}>{content}</td>;
+  return <td className={`${className} w-full leading-tight`}>{content}</td>;
 }

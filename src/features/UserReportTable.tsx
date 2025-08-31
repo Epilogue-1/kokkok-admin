@@ -145,7 +145,7 @@ export default function UserReportTable() {
         {REPORTS.map((report, index) => (
           <TableRow key={index}>
             <TableRowItem
-              className="text-left"
+              className="truncate text-left"
               content={`${report.userName} (${report.userEmail})`}
             />
             <TableRowItem
