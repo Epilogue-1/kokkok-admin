@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -165,56 +166,62 @@ export default function ContentReportTable() {
     <Table>
       {/* 표 머리글 */}
       <TableHead>
-        <TableHeadItem className="max-w-[60px] text-center" content="분류" />
-        <TableHeadItem className="text-center" content="내용" />
-        <TableHeadItem className="max-w-[150px] text-center" content="글쓴이" />
-        <TableHeadItem className="max-w-[60px] text-center" content="신고 수" />
-        <TableHeadItem
-          className="max-w-[150px] text-center"
-          content="최근 신고일"
-        />
-        <TableHeadItem
-          className="max-w-[100px] text-center"
-          content="처리 상태"
-        />
+        <TableHeadItem className="max-w-[60px] text-center">분류</TableHeadItem>
+        <TableHeadItem className="text-center">내용</TableHeadItem>
+        <TableHeadItem className="max-w-[150px] text-center">
+          글쓴이
+        </TableHeadItem>
+        <TableHeadItem className="max-w-[60px] text-center">
+          신고 수
+        </TableHeadItem>
+        <TableHeadItem className="max-w-[150px] text-center">
+          최근 신고일
+        </TableHeadItem>
+        <TableHeadItem className="max-w-[100px] text-center">
+          처리 상태
+        </TableHeadItem>
       </TableHead>
 
       {/* 표 내용 */}
       <TableBody>
         {REPORTS.map((report, index) => (
-          <TableRow key={index}>
-            <TableRowItem
-              className="max-w-[60px] text-center"
-              content={report.type}
-            />
-            {/* 게시글 글 내용이 없다면 (없음) 이라고 표시 */}
-            {report.content.length > 0 ? (
-              <TableRowItem
-                className="line-clamp-1 whitespace-pre-wrap text-left"
-                content={report.content}
-              />
-            ) : (
-              <TableRowItem
-                className="text-left text-gray-400"
-                content="(없음)"
-              />
-            )}
-            <TableRowItem
-              className="max-w-[150px] truncate text-center"
-              content={`${report.writerName} (${report.writerEmail})`}
-            />
-            <TableRowItem
-              className="max-w-[60px] text-center"
-              content={String(report.count)}
-            />
-            <TableRowItem
-              className="max-w-[150px] text-center"
-              content={report.lastReportDate}
-            />
-            <TableRowItem
-              className="max-w-[100px] text-center"
-              content={report.status}
-            />
+          <TableRow key={index} className="hover:bg-gray-50 active:bg-gray-100">
+            {/* 분류 */}
+            <TableRowItem className="max-w-[60px] text-center">
+              {report.type}
+            </TableRowItem>
+
+            {/* 내용: 게시글 글 내용이 없다면 (없음)이라고 표시 */}
+            <TableRowItem>
+              <Link
+                className={`${
+                  report.content.length > 0 ? "" : "text-gray-400"
+                } line-clamp-1 w-full whitespace-pre-wrap text-left hover:underline`}
+                href="/content-reports/123"
+              >
+                {report.content.length > 0 ? report.content : "(없음)"}
+              </Link>
+            </TableRowItem>
+
+            {/* 글쓴이 */}
+            <TableRowItem className="max-w-[150px] truncate text-center">
+              {`${report.writerName} (${report.writerEmail})`}
+            </TableRowItem>
+
+            {/* 신고 수 */}
+            <TableRowItem className="max-w-[60px] text-center">
+              {String(report.count)}
+            </TableRowItem>
+
+            {/* 최근 신고일 */}
+            <TableRowItem className="max-w-[150px] text-center">
+              {report.lastReportDate}
+            </TableRowItem>
+
+            {/* 처리 상태 */}
+            <TableRowItem className="max-w-[100px] text-center">
+              {report.status}
+            </TableRowItem>
           </TableRow>
         ))}
       </TableBody>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -28,7 +29,7 @@ const REPORTS: Report[] = [
     userName: "ㅁㄴㅇㄹ",
     count: 2,
     lastReportDate: "2025년 7월 23일",
-    status: "-",
+    status: "기각",
   },
   {
     userEmail: "dsd5p4hn1@privaterelay.appleid.com",
@@ -42,14 +43,14 @@ const REPORTS: Report[] = [
     userName: "ㅁㅁㅁㅁㅁ",
     count: 1,
     lastReportDate: "2025년 7월 23일",
-    status: "-",
+    status: "퇴출",
   },
   {
     userEmail: "5fysn9bvv4@privaterelay.appleid.com",
     userName: "5fysn9bvv4",
     count: 2,
     lastReportDate: "2025년 7월 23일",
-    status: "-",
+    status: "기각",
   },
   {
     userEmail: "eickdkssx20290@gmail.com",
@@ -63,7 +64,7 @@ const REPORTS: Report[] = [
     userName: "YYY",
     count: 3,
     lastReportDate: "2025년 7월 23일",
-    status: "-",
+    status: "기각",
   },
   {
     userEmail: "allcatismine1203@eoilup.com",
@@ -77,14 +78,14 @@ const REPORTS: Report[] = [
     userName: "꾸꾸",
     count: 12,
     lastReportDate: "2025년 7월 23일",
-    status: "-",
+    status: "기각",
   },
   {
     userEmail: "wlkejdje12@naver.com",
     userName: "정민재",
     count: 2,
     lastReportDate: "2025년 7월 23일",
-    status: "-",
+    status: "기각",
   },
   {
     userEmail: "asdfeccus04cali@gmail.com",
@@ -98,7 +99,7 @@ const REPORTS: Report[] = [
     userName: "이승헌",
     count: 2,
     lastReportDate: "2025년 7월 23일",
-    status: "-",
+    status: "퇴출",
   },
   {
     userEmail: "zklxvik12034@ikowat.com",
@@ -112,14 +113,14 @@ const REPORTS: Report[] = [
     userName: "AAAAABBBBBCCCCCDDDDDEEEEEFFFFFGGGGG",
     count: 1,
     lastReportDate: "2025년 7월 23일",
-    status: "-",
+    status: "기각",
   },
   {
     userEmail: "ryuhw@gmail.com",
     userName: "류혜원",
     count: 7,
     lastReportDate: "2025년 7월 23일",
-    status: "-",
+    status: "퇴출",
   },
 ];
 
@@ -128,38 +129,46 @@ export default function UserReportTable() {
     <Table>
       {/* 표 머리글 */}
       <TableHead>
-        <TableHeadItem className="text-center" content="사용자" />
-        <TableHeadItem className="max-w-[80px] text-center" content="신고 수" />
-        <TableHeadItem
-          className="max-w-[150px] text-center"
-          content="최근 신고일"
-        />
-        <TableHeadItem
-          className="max-w-[100px] text-center"
-          content="처리 상태"
-        />
+        <TableHeadItem className="text-center">사용자</TableHeadItem>
+        <TableHeadItem className="max-w-[80px] text-center">
+          신고 수
+        </TableHeadItem>
+        <TableHeadItem className="max-w-[150px] text-center">
+          최근 신고일
+        </TableHeadItem>
+        <TableHeadItem className="max-w-[100px] text-center">
+          처리 상태
+        </TableHeadItem>
       </TableHead>
 
       {/* 표 내용 */}
       <TableBody>
         {REPORTS.map((report, index) => (
-          <TableRow key={index}>
-            <TableRowItem
-              className="truncate text-left"
-              content={`${report.userName} (${report.userEmail})`}
-            />
-            <TableRowItem
-              className="max-w-[80px] text-center"
-              content={String(report.count)}
-            />
-            <TableRowItem
-              className="max-w-[150px] text-center"
-              content={report.lastReportDate}
-            />
-            <TableRowItem
-              className="max-w-[100px] text-center"
-              content={report.status}
-            />
+          <TableRow key={index} className="hover:bg-gray-50 active:bg-gray-100">
+            {/* 사용자 */}
+            <TableRowItem>
+              <Link
+                className="flex w-full truncate text-left hover:underline"
+                href="/user-reports/123"
+              >
+                {`${report.userName} (${report.userEmail})`}
+              </Link>
+            </TableRowItem>
+
+            {/* 신고 수 */}
+            <TableRowItem className="max-w-[80px] text-center">
+              {String(report.count)}
+            </TableRowItem>
+
+            {/* 최근 신고일 */}
+            <TableRowItem className="max-w-[150px] text-center">
+              {report.lastReportDate}
+            </TableRowItem>
+
+            {/* 처리 상태 */}
+            <TableRowItem className="max-w-[100px] text-center">
+              {report.status}
+            </TableRowItem>
           </TableRow>
         ))}
       </TableBody>

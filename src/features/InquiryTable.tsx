@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -124,35 +125,46 @@ export default function InquiryTable() {
     <Table>
       {/* 표 머리글 */}
       <TableHead>
-        <TableHeadItem className="max-w-[100px] text-center" content="타입" />
-        <TableHeadItem className="text-center" content="내용" />
-        <TableHeadItem className="max-w-[150px] text-center" content="작성일" />
-        <TableHeadItem
-          className="max-w-[100px] text-center"
-          content="처리 상태"
-        />
+        <TableHeadItem className="max-w-[100px] text-center">
+          타입
+        </TableHeadItem>
+        <TableHeadItem className="text-center">내용</TableHeadItem>
+        <TableHeadItem className="max-w-[150px] text-center">
+          작성일
+        </TableHeadItem>
+        <TableHeadItem className="max-w-[100px] text-center">
+          처리 상태
+        </TableHeadItem>
       </TableHead>
 
       {/* 표 내용 */}
       <TableBody>
         {INQUIRIES.map((inquiry, index) => (
-          <TableRow key={index}>
-            <TableRowItem
-              className="max-w-[100px] text-center"
-              content={inquiry.type}
-            />
-            <TableRowItem
-              className="line-clamp-1 whitespace-pre-wrap text-left"
-              content={inquiry.content}
-            />
-            <TableRowItem
-              className="max-w-[150px] text-center"
-              content={inquiry.createdDate}
-            />
-            <TableRowItem
-              className="max-w-[100px] text-center"
-              content={inquiry.status}
-            />
+          <TableRow key={index} className="hover:bg-gray-50 active:bg-gray-100">
+            {/* 타입 */}
+            <TableRowItem className="max-w-[100px] text-center">
+              {inquiry.type}
+            </TableRowItem>
+
+            {/* 내용 */}
+            <TableRowItem>
+              <Link
+                className="line-clamp-1 w-full whitespace-pre-wrap text-left hover:underline"
+                href={"/inquiries/123"}
+              >
+                {inquiry.content}
+              </Link>
+            </TableRowItem>
+
+            {/* 작성일 */}
+            <TableRowItem className="max-w-[150px] text-center">
+              {inquiry.createdDate}
+            </TableRowItem>
+
+            {/* 처리 상태 */}
+            <TableRowItem className="max-w-[100px] text-center">
+              {inquiry.status}
+            </TableRowItem>
           </TableRow>
         ))}
       </TableBody>

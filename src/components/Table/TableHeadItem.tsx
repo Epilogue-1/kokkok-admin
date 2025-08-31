@@ -1,8 +1,7 @@
-interface Props {
+interface Props extends React.PropsWithChildren {
   className?: string;
-  content: string;
 }
 
-export default function TableHeadItem({ className = "", content }: Props) {
-  return <th className={`${className} w-full leading-tight`}>{content}</th>;
+export default function TableHeadItem({ className = "", children }: Props) {
+  return <th className={`${className} w-full leading-tight`}>{children}</th>;
 }

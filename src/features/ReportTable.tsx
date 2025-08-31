@@ -30,32 +30,41 @@ export default function ReportTable({ reports }: Props) {
     <Table>
       {/* 표 머리글 */}
       <TableHead>
-        <TableHeadItem className="max-w-[150px] text-center" content="타입" />
-        <TableHeadItem className="text-center" content="내용" />
-        <TableHeadItem className="max-w-[160px] text-center" content="신고자" />
-        <TableHeadItem className="max-w-[150px] text-center" content="신고일" />
+        <TableHeadItem className="max-w-[150px] text-center">
+          타입
+        </TableHeadItem>
+        <TableHeadItem className="text-center">내용</TableHeadItem>
+        <TableHeadItem className="max-w-[160px] text-center">
+          신고자
+        </TableHeadItem>
+        <TableHeadItem className="max-w-[150px] text-center">
+          신고일
+        </TableHeadItem>
       </TableHead>
 
       {/* 표 내용 */}
       <TableBody>
         {reports.map((report, index) => (
           <TableRow key={index}>
-            <TableRowItem
-              className="max-w-[150px] text-center"
-              content={report.type}
-            />
-            <TableRowItem
-              className="whitespace-pre-wrap text-left"
-              content={report.content}
-            />
-            <TableRowItem
-              className="max-w-[160px] break-all text-center"
-              content={report.writerEmail}
-            />
-            <TableRowItem
-              className="max-w-[150px] text-center"
-              content={report.reportDate}
-            />
+            {/* 타입 */}
+            <TableRowItem className="max-w-[150px] text-center">
+              {report.type}
+            </TableRowItem>
+
+            {/* 내용 */}
+            <TableRowItem className="whitespace-pre-wrap text-left">
+              {report.content}
+            </TableRowItem>
+
+            {/* 신고자 */}
+            <TableRowItem className="max-w-[160px] break-all text-center">
+              {report.writerEmail}
+            </TableRowItem>
+
+            {/* 신고일 */}
+            <TableRowItem className="max-w-[150px] text-center">
+              {report.reportDate}
+            </TableRowItem>
           </TableRow>
         ))}
       </TableBody>

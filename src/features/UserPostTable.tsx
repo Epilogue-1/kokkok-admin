@@ -55,35 +55,35 @@ export default function UserPostTable() {
     <Table>
       {/* 표 머리글 */}
       <TableHead>
-        <TableHeadItem className="text-center" content="내용" />
-        <TableHeadItem className="max-w-[130px] text-center" content="작성일" />
-        <TableHeadItem className="max-w-[80px] text-center" content="신고" />
+        <TableHeadItem className="text-center">내용</TableHeadItem>
+        <TableHeadItem className="max-w-[130px] text-center">
+          작성일
+        </TableHeadItem>
+        <TableHeadItem className="max-w-[80px] text-center">신고</TableHeadItem>
       </TableHead>
 
       {/* 표 내용 */}
       <TableBody>
         {POSTS.map((post, index) => (
           <TableRow key={index}>
-            {/* 게시글 글 내용이 없다면 (없음) 이라고 표시 */}
-            {post.content.length > 0 ? (
-              <TableRowItem
-                className="line-clamp-1 whitespace-pre-wrap text-left"
-                content={`${post.content}`}
-              />
-            ) : (
-              <TableRowItem
-                className="text-left text-gray-400"
-                content="(없음)"
-              />
-            )}
+            {/* 내용: 게시글 글 내용이 없다면 (없음)이라고 표시 */}
             <TableRowItem
-              className="max-w-[130px] text-center"
-              content={post.createdDate}
-            />
-            <TableRowItem
-              className="max-w-[80px] text-center"
-              content={`${post.reportCount}`}
-            />
+              className={`${
+                post.content.length > 0 ? "" : "text-gray-400"
+              } line-clamp-1 whitespace-pre-wrap text-left`}
+            >
+              {post.content.length > 0 ? post.content : "(없음)"}
+            </TableRowItem>
+
+            {/* 작성일 */}
+            <TableRowItem className="max-w-[130px] text-center">
+              {post.createdDate}
+            </TableRowItem>
+
+            {/* 신고*/}
+            <TableRowItem className="max-w-[80px] text-center">
+              {post.reportCount}
+            </TableRowItem>
           </TableRow>
         ))}
       </TableBody>
