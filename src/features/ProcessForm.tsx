@@ -1,17 +1,40 @@
+"use client";
+
+import { useState } from "react";
 import Button from "@/components/Button";
-import SortDropdown from "@/components/SortDropdown";
+import Select from "@/components/Select";
+
+type ProcessType = "메모" | "기각" | "제한";
 
 export default function ProcessForm() {
+  const [processType, setProcessType] = useState<ProcessType>("메모");
+
+  const selectItems: {
+    label: ProcessType;
+    destructive?: boolean;
+  }[] = [
+    { label: "메모" },
+    { label: "기각" },
+    { label: "제한", destructive: true },
+  ];
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(processType);
+  };
+
   return (
-    <form className="flex flex-col gap-2 rounded-xl border border-gray-300 p-2">
+    <form
+      className="flex flex-col gap-2 rounded-xl border border-gray-300 p-2"
+      onSubmit={(event) => handleSubmit(event)}
+    >
       {/* 처리 유형 선택 */}
-      {/* TODO: 임시! select로 바꿀 것 */}
-      <SortDropdown
-        items={[
-          { label: "메모", value: "memo" },
-          { label: "기각", value: "dismiss" },
-          { label: "제한", value: "restricted" },
-        ]}
+      <Select
+        items={selectItems}
+        value={processType}
+        setValue={
+          setProcessType as React.Dispatch<React.SetStateAction<string>>
+        }
       />
 
       {/* 메모 입력란 */}
