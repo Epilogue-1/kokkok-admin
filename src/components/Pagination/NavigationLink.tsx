@@ -6,7 +6,7 @@ interface Props extends LinkProps, React.PropsWithChildren {
   disabled?: boolean;
 }
 
-export default function IndicatorLink({
+export default function NavigationLink({
   direction,
   disabled,
   ...props

@@ -1,4 +1,4 @@
-import IndicatorLink from "./IndicatorLink";
+import NavigationLink from "./NavigationLink";
 import PageLink from "./PageLink";
 
 interface Props {
@@ -15,8 +15,8 @@ export default function Pagination({ query, total }: Props) {
 
   const startPage = Math.floor((current - 1) / PAGE_SIZE) * PAGE_SIZE + 1;
   const endPage = Math.min(startPage + 4, total);
-  const pages = Array.from({ length: endPage - startPage + 1 }, (_, i) => {
-    return startPage + i;
+  const pages = Array.from({ length: endPage - startPage + 1 }, (_, index) => {
+    return startPage + index;
   });
 
   const hasPrevPage = startPage > 1;
@@ -24,7 +24,7 @@ export default function Pagination({ query, total }: Props) {
 
   return (
     <div className="flex gap-3">
-      <IndicatorLink
+      <NavigationLink
         direction="prev"
         disabled={!hasPrevPage}
         href={{ query: { ...query, [QUERY_KEY]: startPage - 1 } }}
@@ -40,7 +40,7 @@ export default function Pagination({ query, total }: Props) {
         </PageLink>
       ))}
 
-      <IndicatorLink
+      <NavigationLink
         direction="next"
         disabled={!hasNextPage}
         href={{ query: { ...query, [QUERY_KEY]: endPage + 1 } }}
