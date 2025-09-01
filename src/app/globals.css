@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind v4 @theme 기능 */
 @theme {
   --color-primary-50: #faf5ff;
   --color-primary-100: #f3edfe;

@@ -144,6 +144,7 @@ export default function UserReportTable() {
       {/* 표 내용 */}
       <TableBody>
         {REPORTS.map((report, index) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: TODO: 실제 데이터 반영 시 id key 사용하도록 수정
           <TableRow key={index} className="hover:bg-gray-50 active:bg-gray-100">
             {/* 사용자 */}
             <TableRowItem>

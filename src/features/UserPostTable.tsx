@@ -65,6 +65,7 @@ export default function UserPostTable() {
       {/* 표 내용 */}
       <TableBody>
         {POSTS.map((post, index) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: TODO: 실제 데이터 반영 시 id key 사용하도록 수정
           <TableRow key={index}>
             {/* 내용: 게시글 글 내용이 없다면 (없음)이라고 표시 */}
             <TableRowItem

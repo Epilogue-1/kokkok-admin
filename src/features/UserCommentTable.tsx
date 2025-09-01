@@ -62,6 +62,7 @@ export default function UserCommentTable() {
       {/* 표 내용 */}
       <TableBody>
         {COMMENTS.map((comment, index) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: TODO: 실제 데이터 반영 시 id key 사용하도록 수정
           <TableRow key={index}>
             {/* 내용 */}
             <TableRowItem className="line-clamp-1 whitespace-pre-wrap text-left">

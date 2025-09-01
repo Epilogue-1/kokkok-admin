@@ -45,6 +45,7 @@ export default function ReportTable({ reports }: Props) {
       {/* 표 내용 */}
       <TableBody>
         {reports.map((report, index) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: TODO: 실제 데이터 반영 시 id key 사용하도록 수정
           <TableRow key={index}>
             {/* 타입 */}
             <TableRowItem className="max-w-[150px] text-center">
