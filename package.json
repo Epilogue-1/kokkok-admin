@@ -8,7 +8,14 @@
     "start": "next start",
     "lint": "biome check",
     "format": "biome format --write",
-    "fix": "biome check . --write --unsafe"
+    "fix": "biome check . --write --unsafe",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json,css,md,mdx}": [
+      "biome check --write --unsafe",
+      "biome check --diagnostic-level=error"
+    ]
   },
   "dependencies": {
     "next": "15.5.0",
@@ -22,6 +29,8 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
