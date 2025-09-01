@@ -1,8 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useCallback, useMemo, useRef, useState } from "react";
-import { DropdownContext } from "./context";
+import { useCallback, useRef, useState } from "react";
 import Menu from "./Menu";
 import MenuItem from "./MenuItem";
 import Trigger from "./Trigger";
@@ -35,38 +34,45 @@ export default function SortDropdown({ items }: Props) {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const toggle = useCallback(() => {
+  const toggleMenu = useCallback(() => {
     setIsOpen((prev) => !prev);
   }, []);
-  const close = useCallback(() => {
+  const closeMenu = useCallback(() => {
     setIsOpen(false);
   }, []);
 
-  const context = useMemo(
-    () => ({
-      dropdownRef,
-      isOpen,
-      toggle,
-      close,
-    }),
-    [isOpen, toggle, close],
+  // SortDropdown 외부 영역 클릭 시, 메뉴 닫기
+  const handleMousedownMenu = useCallback(
+    (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        closeMenu();
+      }
+    },
+    [closeMenu],
   );
 
   return (
-    <DropdownContext.Provider value={context}>
-      <div className="relative w-[120px]" ref={dropdownRef}>
-        {/* 트리거 */}
-        <Trigger>{currentLabel}</Trigger>
+    <div className="relative w-[120px]" ref={dropdownRef}>
+      {/* 트리거 */}
+      <Trigger onClick={toggleMenu}>{currentLabel}</Trigger>
 
-        {/* 메뉴 */}
-        <Menu>
+      {/* 메뉴 */}
+      {isOpen && (
+        <Menu onMousedown={handleMousedownMenu}>
           {items.map((item) => (
-            <MenuItem key={item.value} href={createNextUrl(item.value)}>
+            <MenuItem
+              key={item.value}
+              href={createNextUrl(item.value)}
+              onClick={closeMenu}
+            >
               {item.label}
             </MenuItem>
           ))}
         </Menu>
-      </div>
-    </DropdownContext.Provider>
+      )}
+    </div>
   );
 }

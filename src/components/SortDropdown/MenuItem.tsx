@@ -1,21 +1,16 @@
 "use client";
 
 import Link, { type LinkProps } from "next/link";
-import { useDropdown } from "./context";
 
-interface Props extends LinkProps, React.PropsWithChildren {
-  value?: string;
-}
+interface Props extends LinkProps, React.PropsWithChildren {}
 
-export default function MenuItem({ children, ...props }: Props) {
-  const { close } = useDropdown();
-
+export default function MenuItem({ href, onClick, children }: Props) {
   return (
     <li>
       <Link
         className="flex h-9 w-full cursor-pointer items-center justify-center transition-colors hover:bg-gray-100 active:bg-gray-200"
-        onClick={close}
-        {...props}
+        href={href}
+        onClick={onClick}
       >
         {children}
       </Link>

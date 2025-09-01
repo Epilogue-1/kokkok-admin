@@ -1,39 +1,22 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
-import { useDropdown } from "./context";
+import { useEffect } from "react";
 
-interface Props extends React.PropsWithChildren {}
+interface Props extends React.PropsWithChildren {
+  onMousedown: (event: MouseEvent) => void;
+}
 
-export default function Menu({ children }: Props) {
-  const { dropdownRef, isOpen, close } = useDropdown();
-
-  // 메뉴 바깥 영역 클릭 시, 메뉴 닫힘
-  const handleClickOutside = useCallback(
-    (event: MouseEvent) => {
-      if (
-        isOpen &&
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        close();
-      }
-    },
-    [dropdownRef, isOpen, close],
-  );
-
+export default function Menu({ onMousedown, children }: Props) {
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", onMousedown);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", onMousedown);
     };
-  }, [handleClickOutside]);
+  }, [onMousedown]);
 
   return (
-    isOpen && (
-      <ul className="absolute mt-1 w-full overflow-hidden rounded-lg border border-gray-300 bg-white">
-        {children}
-      </ul>
-    )
+    <ul className="absolute mt-1 w-full overflow-hidden rounded-lg border border-gray-300 bg-white">
+      {children}
+    </ul>
   );
 }
