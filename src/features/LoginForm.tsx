@@ -23,6 +23,7 @@ export default function LoginForm({ ...props }: Props) {
           id="password"
           name="password"
           type="password"
+          autoComplete="off"
           placeholder="비밀번호를 입력해주세요"
         />
       </div>
