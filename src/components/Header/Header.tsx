@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { TbLogout } from "react-icons/tb";
+import { redirect } from "next/navigation";
+import { logout } from "@/api/auth";
+import LogoutButton from "./LogoutButton";
 import NavigationBar from "./NavigationBar";
 
 type NavName = "사용자 신고" | "게시글/댓글 신고" | "문의";
@@ -28,6 +30,12 @@ export default function Header({ currentNav }: Props) {
     },
   ];
 
+  async function logoutAction() {
+    "use server";
+    await logout();
+    redirect("/login"); // 로그아웃 후 이동
+  }
+
   return (
     <header className="flex h-13 justify-center border-gray-300 border-b">
       <div className="flex h-full w-full max-w-[1240px] items-center gap-5 px-5">
@@ -48,13 +56,10 @@ export default function Header({ currentNav }: Props) {
         {/* 사용자 메뉴 */}
         <div className="flex items-center gap-3">
           <span className="mx-2 text-sm">이승헌</span>
+
           <div className="h-4 w-[1px] bg-gray-300" />
-          <button
-            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-md transition-colors hover:bg-gray-100 active:bg-gray-200"
-            type="button"
-          >
-            <TbLogout className="text-xl" />
-          </button>
+
+          <LogoutButton logoutAction={logoutAction} />
         </div>
       </div>
     </header>

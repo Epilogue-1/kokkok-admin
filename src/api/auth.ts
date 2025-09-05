@@ -29,3 +29,8 @@ export async function login(
 
   return { ok: true };
 }
+
+export async function logout() {
+  const supabase = await createClient();
+  await supabase.auth.signOut({ scope: "local" });
+}
