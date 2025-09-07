@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { logout } from "@/api/auth";
+import { getUserName, logout } from "@/api/auth";
 import LogoutButton from "./LogoutButton";
 import NavigationBar from "./NavigationBar";
 
@@ -14,7 +14,7 @@ interface Props {
   currentNav?: NavName;
 }
 
-export default function Header({ currentNav }: Props) {
+export default async function Header({ currentNav }: Props) {
   const navs: Nav[] = [
     {
       name: "사용자 신고",
@@ -29,6 +29,8 @@ export default function Header({ currentNav }: Props) {
       href: "/inquiries",
     },
   ];
+
+  const userName = await getUserName();
 
   async function logoutAction() {
     "use server";
@@ -55,7 +57,7 @@ export default function Header({ currentNav }: Props) {
 
         {/* 사용자 메뉴 */}
         <div className="flex items-center gap-3">
-          <span className="mx-2 text-sm">이승헌</span>
+          <span className="mx-2 text-sm">{userName}</span>
 
           <div className="h-4 w-[1px] bg-gray-300" />
 

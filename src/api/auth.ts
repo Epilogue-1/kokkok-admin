@@ -34,3 +34,30 @@ export async function logout() {
   const supabase = await createClient();
   await supabase.auth.signOut({ scope: "local" });
 }
+
+export async function getUserName() {
+  const supabase = await createClient();
+
+  // 현재 유저 가져오기
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    return null;
+  }
+
+  // 관리자 이름 조회
+  const { data, error } = await supabase
+    .from("admin")
+    .select("name")
+    .eq("userId", user.id)
+    .single();
+
+  if (error || !data) {
+    return null;
+  }
+
+  return data.name as string;
+}
