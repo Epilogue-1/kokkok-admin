@@ -57,7 +57,9 @@ export default async function Header({ currentNav }: Props) {
 
         {/* 사용자 메뉴 */}
         <div className="flex items-center gap-3">
-          <span className="mx-2 text-sm">{userName}</span>
+          <span className="mx-2 text-sm">
+            관리자 <strong className="font-semibold">{userName}</strong>
+          </span>
 
           <div className="h-4 w-[1px] bg-gray-300" />
 
