@@ -1,3 +1,4 @@
+import { getUserReports } from "@/api/report";
 import Filter from "@/components/Filter";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
@@ -5,11 +6,31 @@ import Pagination from "@/components/Pagination";
 import SortDropdown from "@/components/SortDropdown";
 import Title from "@/components/Title";
 import UserReportTable from "@/features/UserReportTable";
+import { asArray } from "@/utils/array";
+
+type Status = NonNullable<
+  Parameters<typeof getUserReports>[0]["status"]
+>[number];
+type Sort = Parameters<typeof getUserReports>[0]["sort"];
+
+const PAGE_SIZE = 15;
 
 export default async function UserReports(props: PageProps<"/user-reports">) {
   const query = await props.searchParams;
 
-  const totalPage = 13;
+  // query에서 값 꺼내기
+  const status = asArray(query.status) as Status[];
+  const sort = (query.sort as Sort) || "latest";
+  const page = query.page ? Number(query.page) : 1;
+
+  const { data: reports, total } = await getUserReports({
+    status,
+    sort,
+    page,
+    pageSize: PAGE_SIZE,
+  });
+
+  const totalPages = total === 0 ? 0 : Math.ceil(total / PAGE_SIZE);
 
   return (
     <>
@@ -24,9 +45,9 @@ export default async function UserReports(props: PageProps<"/user-reports">) {
             query={query}
             queryKey="status"
             items={[
-              { label: "-", value: "none" },
-              { label: "기각", value: "dismiss" },
-              { label: "퇴출", value: "ban" },
+              { label: "-", value: "pending" },
+              { label: "기각", value: "ignored" },
+              { label: "퇴출", value: "banned" },
             ]}
           />
 
@@ -42,12 +63,12 @@ export default async function UserReports(props: PageProps<"/user-reports">) {
 
         {/* 사용자 신고 목록 테이블 */}
         <div className="mt-2">
-          <UserReportTable />
+          <UserReportTable reports={reports} />
         </div>
 
         {/* 페이지네이션 */}
         <div className="mt-3 flex w-full justify-center">
-          <Pagination query={query} total={totalPage} />
+          <Pagination query={query} total={totalPages} />
         </div>
       </Main>
     </>

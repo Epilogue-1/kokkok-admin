@@ -7,124 +7,29 @@ import {
   TableRow,
   TableRowItem,
 } from "@/components/Table";
+import { formatToKoreanDate } from "@/utils/formatDate";
 
 interface Report {
-  userEmail: string;
-  userName: string;
-  count: number;
-  lastReportDate: string;
-  status: "-" | "기각" | "퇴출";
+  reportedUser: {
+    id: string;
+    username: string;
+    email: string;
+  };
+  reportCount: number;
+  lastReportedAt: string;
+  reportStatus: "pending" | "ignored" | "banned";
+}
+interface Props {
+  reports: Report[];
 }
 
-const REPORTS: Report[] = [
-  {
-    userEmail: "asdfeccus04@naver.com",
-    userName: "준혁학생",
-    count: 2,
-    lastReportDate: "2025년 7월 23일",
-    status: "-",
-  },
-  {
-    userEmail: "ciwoejkcv12@datingel.com",
-    userName: "ㅁㄴㅇㄹ",
-    count: 2,
-    lastReportDate: "2025년 7월 23일",
-    status: "기각",
-  },
-  {
-    userEmail: "dsd5p4hn1@privaterelay.appleid.com",
-    userName: "고독한 러너",
-    count: 1,
-    lastReportDate: "2025년 7월 23일",
-    status: "-",
-  },
-  {
-    userEmail: "399gkejide@motivue.com",
-    userName: "ㅁㅁㅁㅁㅁ",
-    count: 1,
-    lastReportDate: "2025년 7월 23일",
-    status: "퇴출",
-  },
-  {
-    userEmail: "5fysn9bvv4@privaterelay.appleid.com",
-    userName: "5fysn9bvv4",
-    count: 2,
-    lastReportDate: "2025년 7월 23일",
-    status: "기각",
-  },
-  {
-    userEmail: "eickdkssx20290@gmail.com",
-    userName: "주앙이아빠",
-    count: 2,
-    lastReportDate: "2025년 7월 23일",
-    status: "-",
-  },
-  {
-    userEmail: "beicyskd0902@gmail.com",
-    userName: "YYY",
-    count: 3,
-    lastReportDate: "2025년 7월 23일",
-    status: "기각",
-  },
-  {
-    userEmail: "allcatismine1203@eoilup.com",
-    userName: "테스트",
-    count: 5,
-    lastReportDate: "2025년 7월 23일",
-    status: "-",
-  },
-  {
-    userEmail: "gguggu0805@naver.com",
-    userName: "꾸꾸",
-    count: 12,
-    lastReportDate: "2025년 7월 23일",
-    status: "기각",
-  },
-  {
-    userEmail: "wlkejdje12@naver.com",
-    userName: "정민재",
-    count: 2,
-    lastReportDate: "2025년 7월 23일",
-    status: "기각",
-  },
-  {
-    userEmail: "asdfeccus04cali@gmail.com",
-    userName: "Dani California",
-    count: 1,
-    lastReportDate: "2025년 7월 23일",
-    status: "-",
-  },
-  {
-    userEmail: "heony704@gmail.com",
-    userName: "이승헌",
-    count: 2,
-    lastReportDate: "2025년 7월 23일",
-    status: "퇴출",
-  },
-  {
-    userEmail: "zklxvik12034@ikowat.com",
-    userName: "안뇨옹",
-    count: 2,
-    lastReportDate: "2025년 7월 23일",
-    status: "-",
-  },
-  {
-    userEmail: "test@test.com",
-    userName: "AAAAABBBBBCCCCCDDDDDEEEEEFFFFFGGGGG",
-    count: 1,
-    lastReportDate: "2025년 7월 23일",
-    status: "기각",
-  },
-  {
-    userEmail: "ryuhw@gmail.com",
-    userName: "류혜원",
-    count: 7,
-    lastReportDate: "2025년 7월 23일",
-    status: "퇴출",
-  },
-];
+export default function UserReportTable({ reports }: Props) {
+  const statusLabel: Record<Report["reportStatus"], string> = {
+    pending: "-",
+    ignored: "기각",
+    banned: "퇴출",
+  };
 
-export default function UserReportTable() {
   return (
     <Table>
       {/* 표 머리글 */}
@@ -143,32 +48,34 @@ export default function UserReportTable() {
 
       {/* 표 내용 */}
       <TableBody>
-        {REPORTS.map((report, index) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: TODO: 실제 데이터 반영 시 id key 사용하도록 수정
-          <TableRow key={index} className="hover:bg-gray-50 active:bg-gray-100">
+        {reports.map((report) => (
+          <TableRow
+            key={report.reportedUser.id}
+            className="hover:bg-gray-50 active:bg-gray-100"
+          >
             {/* 사용자 */}
             <TableRowItem>
               <Link
                 className="flex w-full truncate text-left hover:underline"
-                href="/user-reports/123"
+                href={`/user-reports/${report.reportedUser.id}`}
               >
-                {`${report.userName} (${report.userEmail})`}
+                {`${report.reportedUser.username} (${report.reportedUser.email})`}
               </Link>
             </TableRowItem>
 
             {/* 신고 수 */}
             <TableRowItem className="max-w-[80px] text-center">
-              {String(report.count)}
+              {String(report.reportCount)}
             </TableRowItem>
 
             {/* 최근 신고일 */}
             <TableRowItem className="max-w-[150px] text-center">
-              {report.lastReportDate}
+              {formatToKoreanDate(report.lastReportedAt)}
             </TableRowItem>
 
             {/* 처리 상태 */}
             <TableRowItem className="max-w-[100px] text-center">
-              {report.status}
+              {statusLabel[report.reportStatus]}
             </TableRowItem>
           </TableRow>
         ))}
