@@ -12,7 +12,7 @@ type Type = NonNullable<Parameters<typeof getInquiries>[0]["type"]>[number];
 type Status = NonNullable<Parameters<typeof getInquiries>[0]["status"]>[number];
 type Sort = Parameters<typeof getInquiries>[0]["sort"];
 
-const PAGE_SIZE = 13;
+const PAGE_SIZE = 15;
 
 export default async function Inquiries(props: PageProps<"/inquiries">) {
   const query = await props.searchParams;
@@ -23,7 +23,7 @@ export default async function Inquiries(props: PageProps<"/inquiries">) {
   const sort = (query.sort as Sort) || "latest";
   const page = query.page ? Number(query.page) : 1;
 
-  const { inquiries, total } = await getInquiries({
+  const { data: inquiries, total } = await getInquiries({
     type,
     status,
     sort,

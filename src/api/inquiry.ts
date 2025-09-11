@@ -42,5 +42,5 @@ export async function getInquiries({
 
   const { data, count } = await query;
 
-  return { inquiries: data || [], total: count || 0 };
+  return { data: data || [], total: count || 0 };
 }

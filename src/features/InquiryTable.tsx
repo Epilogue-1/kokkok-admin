@@ -16,7 +16,6 @@ interface Inquiry {
   createdAt: string;
   status: "pending" | "ignored" | "processing" | "resolved";
 }
-
 interface Props {
   inquiries: Inquiry[];
 }
