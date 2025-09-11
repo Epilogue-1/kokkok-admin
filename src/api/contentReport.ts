@@ -3,7 +3,7 @@ import { createClient } from "@/api/client";
 
 type Content = "post" | "comment";
 type Status = "pending" | "ignored" | "banned";
-type Sort = "latest" | "oldest";
+type Sort = "latest" | "oldest" | "most";
 interface Options {
   content?: Content[];
   status?: Status[];

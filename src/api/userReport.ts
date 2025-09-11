@@ -2,7 +2,7 @@ import "server-only";
 import { createClient } from "@/api/client";
 
 type Status = "pending" | "ignored" | "banned";
-type Sort = "latest" | "oldest";
+type Sort = "latest" | "oldest" | "most";
 interface Options {
   status?: Status[];
   sort: Sort;
