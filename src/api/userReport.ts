@@ -10,7 +10,7 @@ interface Options {
   pageSize: number;
 }
 
-// 신고 조회
+// 사용자 신고 조회
 export async function getUserReports({
   status,
   sort,
