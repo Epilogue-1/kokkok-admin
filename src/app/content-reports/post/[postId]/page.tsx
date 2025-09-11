@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import Main from "@/components/Main";
 import SubTitle from "@/components/SubTitle";
 import Title from "@/components/Title";
-import CommentCard from "@/features/CommentCard";
 import PostCard from "@/features/PostCard";
 import ProcessForm from "@/features/ProcessForm";
 import TimelineMemo from "@/features/TimelineMemo";
@@ -85,9 +84,7 @@ const REPORTS_2: Report[] = [
   },
 ];
 
-export default function ContentReportDetail() {
-  const contentType: "게시글" | "댓글" = "게시글";
-
+export default function PostReportDetail() {
   const isRestricted = true;
 
   return (
@@ -96,40 +93,29 @@ export default function ContentReportDetail() {
 
       <Main>
         <div className="flex items-center justify-between">
-          <Title>
-            {contentType === "게시글" ? "게시글 신고" : "댓글 신고"}
-          </Title>
+          <Title>게시글 신고 </Title>
 
-          {/* 제한된 신고라면 표시 */}
+          {/* 제한된 게시글이라면 표시 */}
           {isRestricted && (
             <Badge className="mb-2" variant="destructive" content="제한됨" />
           )}
         </div>
 
         <div className="flex flex-col gap-6">
-          {/* 게시글/댓글 내용 */}
-          {contentType === "게시글" ? (
-            <PostCard
-              authorAvatarSrc="/tmp/profile_avatar.jpg"
-              author="이승헌 (heony704@gmail.com)"
-              createdDate="2025년 1월 2일"
-              imagesSrc={[
-                "/tmp/post_image.webp",
-                "/tmp/post_image.webp",
-                "/tmp/post_image.webp",
-                "/tmp/post_image.webp",
-                "/tmp/post_image.webp",
-              ]}
-              content={`뭐라 써야할지 모르겠다 하여튼간에 신고당할만한 내용 미친 어그로입니다.\n아래 신고 이력에 있는 신고 내용은 생각해내기 힘들어서 챗지피티한테 도움받았어요. 인터넷 많이 사용하는 사람처럼 써달라고 했는데 노잼..\n\n더위를 이기는 자신만의 방법이 있나요?\n근데 비 오기 전에 몇주전엔 정말 덥긴 했어요. 땡볕에 돌아다니는데 힘들긴 하더라구요. 저녁에 해 지고 뛰는데도 너무 더워서 미치는 줄 알았어요. 항상 홍익인간이 됩니다. 집에 가면 동생이 괜찮냐고 물어봐요. 저는 러닝할 때 통풍 잘되는 러닝화에다가 운동양말을 신는데요. (운동양말 신어야 발을 딱 잡아줘서..) 운동양말이 두꺼워서 그런가 1키로만 뛰어도 발에서 불이나요. 몸에 걸친게 없어야 편한 저로서는 고역이 따로 없습니다. 다들 이러신지..`}
-            />
-          ) : (
-            <CommentCard
-              authorAvatarSrc="/tmp/profile_avatar.jpg"
-              author="이승헌 (heony704@gmail.com)"
-              createdDate="2025년 1월 2일"
-              content="유튜브 쇼츠 댓글창에서 누가 “내란견 배급견 누구 뽑음?” 이런 분탕 댓글을 도배했는데요. “니 이빨 뽑음” 이라는 대댓이 마음에 들었습니다."
-            />
-          )}
+          {/* 게시글 내용 */}
+          <PostCard
+            authorAvatarSrc="/tmp/profile_avatar.jpg"
+            author="이승헌 (heony704@gmail.com)"
+            createdDate="2025년 1월 2일"
+            imagesSrc={[
+              "/tmp/post_image.webp",
+              "/tmp/post_image.webp",
+              "/tmp/post_image.webp",
+              "/tmp/post_image.webp",
+              "/tmp/post_image.webp",
+            ]}
+            content={`뭐라 써야할지 모르겠다 하여튼간에 신고당할만한 내용 미친 어그로입니다.\n아래 신고 이력에 있는 신고 내용은 생각해내기 힘들어서 챗지피티한테 도움받았어요. 인터넷 많이 사용하는 사람처럼 써달라고 했는데 노잼..\n\n더위를 이기는 자신만의 방법이 있나요?\n근데 비 오기 전에 몇주전엔 정말 덥긴 했어요. 땡볕에 돌아다니는데 힘들긴 하더라구요. 저녁에 해 지고 뛰는데도 너무 더워서 미치는 줄 알았어요. 항상 홍익인간이 됩니다. 집에 가면 동생이 괜찮냐고 물어봐요. 저는 러닝할 때 통풍 잘되는 러닝화에다가 운동양말을 신는데요. (운동양말 신어야 발을 딱 잡아줘서..) 운동양말이 두꺼워서 그런가 1키로만 뛰어도 발에서 불이나요. 몸에 걸친게 없어야 편한 저로서는 고역이 따로 없습니다. 다들 이러신지..`}
+          />
 
           {/* 신고 이력 */}
           <section>

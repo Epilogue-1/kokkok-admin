@@ -75,7 +75,7 @@ export default function ContentReportTable({ reports }: Props) {
                 className={`${
                   report.reportContent.length > 0 ? "" : "text-gray-400"
                 } line-clamp-1 w-full whitespace-pre-wrap text-left hover:underline`}
-                href="/content-reports/123"
+                href={`/content-reports/${report.content}/${report.reportContentId}`}
               >
                 {report.reportContent.length > 0
                   ? report.reportContent
