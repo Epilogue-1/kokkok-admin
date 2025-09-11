@@ -89,7 +89,7 @@ const REPORTS_2: Report[] = [
 ];
 
 export default async function UserReportDetail(
-  props: PageProps<"/user-reports/[reportId]">,
+  props: PageProps<"/user-reports/[userId]">,
 ) {
   const query = await props.searchParams;
 
