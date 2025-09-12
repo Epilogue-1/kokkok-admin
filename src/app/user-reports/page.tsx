@@ -1,4 +1,4 @@
-import { getUserReports } from "@/api/userReport";
+import { getUserReports } from "@/api/report";
 import Filter from "@/components/Filter";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
