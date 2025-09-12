@@ -11,8 +11,22 @@ interface Options {
   page: number;
   pageSize: number;
 }
+interface Inquiry {
+  id: string;
+  createdAt: string;
+  user: {
+    id: string;
+    username: string;
+    email: string;
+  };
+  userId: string;
+  type: Type;
+  content: string;
+  email: string | null;
+  status: Status;
+}
 
-// 문의 조회
+// 문의 전체 조회
 export async function getInquiries({
   type,
   status,
@@ -43,4 +57,31 @@ export async function getInquiries({
   const { data, count } = await query;
 
   return { data: data || [], total: count || 0 };
+}
+
+// id로 문의 조회
+export async function getInquiryById(id: string) {
+  const supabase = await createClient();
+
+  const { data } = await supabase
+    .from("inquiry")
+    .select(
+      `
+      id,
+      createdAt,
+      type,
+      content,
+      email,
+      status,
+      user:user!inquiry_userId_fkey (
+        id,
+        username,
+        email
+      )
+    `,
+    )
+    .eq("id", id)
+    .single();
+
+  return { data: data as unknown as Inquiry };
 }

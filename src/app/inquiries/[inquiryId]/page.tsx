@@ -1,3 +1,4 @@
+import { getInquiryById } from "@/api/inquiry";
 import Badge from "@/components/Badge";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
@@ -7,8 +8,27 @@ import InquiryCard from "@/features/InquiryCard";
 import ProcessForm from "@/features/ProcessForm";
 import TimelineMemo from "@/features/TimelineMemo";
 import TimelineStatusChange from "@/features/TimelineStatusChange";
+import { formatToKoreanDate } from "@/utils/formatDate";
 
-export default function InquiryDetail() {
+export default async function InquiryDetail(
+  props: PageProps<"/inquiries/[inquiryId]">,
+) {
+  const { inquiryId } = await props.params;
+  const { data: inquiry } = await getInquiryById(inquiryId);
+
+  const statusLabel = {
+    pending: "-",
+    ignored: "무시",
+    processing: "진행중",
+    resolved: "완료",
+  };
+  const typeLabel = {
+    bug_report: "오류제보",
+    account: "계정문의",
+    feature_request: "기능제안",
+    other: "기타",
+  };
+
   return (
     <>
       <Header currentNav="문의" />
@@ -22,17 +42,18 @@ export default function InquiryDetail() {
             className="mb-3"
             variant="outline"
             size="large"
-            content="진행중"
+            content={statusLabel[inquiry.status]}
           />
         </div>
 
         <div className="flex flex-col gap-6">
           {/* 문의 내용 */}
           <InquiryCard
-            type="기능제안"
-            writer="이승헌 (heony704@gmail.com)"
-            createdDate="2025년 1월 2일"
-            content={`현재는 반드시 1:1 비율로 사진을 잘라서 올려야 했습니다.\n해당 방식은 긴 사진을 업로드 하기에 불편하여 수정이 필요합니다.\n그래서 자유형으로 사용자가 사진을 잘라서 올릴 수 있도록 수정하고 메인 페이지에서 사진을 contain으로 설정해 전체가 보이도록 하고 여백은 배경에 사진을 블러처리로 띄워서 빈 공간을 채우도록 합니다.`}
+            type={typeLabel[inquiry.type]}
+            writer={`${inquiry.user.username} (${inquiry.user.email})`}
+            createdDate={formatToKoreanDate(inquiry.createdAt)}
+            email={inquiry.email ?? "-"}
+            content={inquiry.content}
           />
 
           {/* 문의 이력 */}

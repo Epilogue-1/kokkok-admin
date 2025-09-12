@@ -1,10 +1,11 @@
+import { TbCalendar, TbMail, TbUser } from "react-icons/tb";
 import Badge from "@/components/Badge";
 
-type InquiryType = "오류제보" | "계정문의" | "기능제안" | "기타";
 interface Props {
-  type: InquiryType;
+  type: string;
   writer: string;
   createdDate: string;
+  email: string;
   content: string;
 }
 
@@ -12,6 +13,7 @@ export default function InquiryCard({
   type,
   writer,
   createdDate,
+  email,
   content,
 }: Props) {
   return (
@@ -20,11 +22,22 @@ export default function InquiryCard({
         {/* 문의 타입 */}
         <Badge content={type} />
 
-        {/* 문의자 & 문의일 */}
-        <div className="flex gap-2.5 text-gray-600">
-          <span>{writer}</span>
-          <span>·</span>
-          <span>{createdDate}</span>
+        <div className="flex gap-5 text-gray-600">
+          {/* 문의자 */}
+          <div className="flex items-center gap-1">
+            <TbUser className="text-gray-400 text-lg" />
+            <span>{writer}</span>
+          </div>
+          {/* 문의 날짜 */}
+          <div className="flex items-center gap-1">
+            <TbCalendar className="text-gray-400 text-lg" />
+            <span>{createdDate}</span>
+          </div>
+          {/* 답장받을 이메일 */}
+          <div className="flex items-center gap-1">
+            <TbMail className="text-gray-400 text-lg" />
+            <span>{email}</span>
+          </div>
         </div>
       </div>
 
