@@ -73,11 +73,7 @@ export async function getInquiryById(id: string) {
       content,
       email,
       status,
-      user:user!inquiry_userId_fkey (
-        id,
-        username,
-        email
-      )
+      user:userId ( id, username, email )
     `,
     )
     .eq("id", id)
