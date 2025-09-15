@@ -21,7 +21,7 @@ export default function PostCard({
       <div className="flex items-center gap-3">
         {/* 게시글 작성자 아바타 */}
         <Image
-          className="rounded-full"
+          className="h-11 w-11 rounded-full object-cover"
           src={authorAvatarSrc}
           alt="댓글 작성자 아바타"
           width={44}
