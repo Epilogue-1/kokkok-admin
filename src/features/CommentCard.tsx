@@ -1,15 +1,15 @@
 import Image from "next/image";
 
 interface Props {
-  authorAvatarSrc: string;
-  author: string;
+  writerAvatar: string;
+  writerName: string;
   createdDate: string;
   content: string;
 }
 
 export default function CommentCard({
-  authorAvatarSrc,
-  author,
+  writerAvatar,
+  writerName,
   createdDate,
   content,
 }: Props) {
@@ -19,7 +19,7 @@ export default function CommentCard({
         {/* 댓글 작성자 아바타 */}
         <Image
           className="h-11 w-11 rounded-full object-cover"
-          src={authorAvatarSrc}
+          src={writerAvatar}
           alt="댓글 작성자 아바타"
           width={44}
           height={44}
@@ -27,7 +27,7 @@ export default function CommentCard({
 
         {/* 작성자 & 작성일 */}
         <div className="flex flex-col">
-          <span>{author}</span>
+          <span>{writerName}</span>
           <span className="text-gray-600 text-sm">{createdDate}</span>
         </div>
       </div>

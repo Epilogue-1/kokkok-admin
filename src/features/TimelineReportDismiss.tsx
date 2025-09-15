@@ -1,14 +1,14 @@
 import { TbCancel } from "react-icons/tb";
 
 interface Props {
-  author: string;
+  writer: string;
   createdDate: string;
   isLastTimeline?: boolean;
   memo?: string;
 }
 
 export default function TimelineReportDismiss({
-  author,
+  writer,
   createdDate,
   isLastTimeline = false,
   memo,
@@ -24,7 +24,7 @@ export default function TimelineReportDismiss({
         {/* 작성자 & 작성일 */}
         <div className="flex h-9 items-center gap-2">
           <span>
-            <strong className="font-bold">{author}</strong>님이{" "}
+            <strong className="font-bold">{writer}</strong>님이{" "}
             <strong className="font-bold">신고 기각</strong>
           </span>
 

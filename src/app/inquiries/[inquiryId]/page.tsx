@@ -62,22 +62,22 @@ export default async function InquiryDetail(
 
             <div className="flex flex-col gap-5">
               <TimelineMemo
-                author="유예하"
+                writer="유예하"
                 createdDate="2025년 1월 20일"
                 memo="2025/01/20 회의 결과, 진행하기로 결정"
               />
               <TimelineStatusChange
-                author="정민재"
+                writer="정민재"
                 createdDate="2025년 2월 2일"
                 to="진행중"
               />
               <TimelineMemo
-                author="정민재"
+                writer="정민재"
                 createdDate="2025년 2월 2일"
                 memo={`깃허브 이슈: https://github.com/Epilogue-1/kokkok/issues/176`}
               />
               <TimelineStatusChange
-                author="장준혁"
+                writer="장준혁"
                 createdDate="2025년 5월 24일"
                 from="진행중"
                 to="완료"

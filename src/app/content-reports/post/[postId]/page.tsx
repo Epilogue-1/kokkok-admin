@@ -109,10 +109,10 @@ export default async function PostReportDetail(
         <div className="flex flex-col gap-6">
           {/* 게시글 내용 */}
           <PostCard
-            authorAvatarSrc={post.user.avatarUrl}
-            author={`${post.user.username} (${post.user.email})`}
+            writerAvatar={post.user.avatarUrl}
+            writerName={`${post.user.username} (${post.user.email})`}
             createdDate={formatToKoreanDate(post.createdAt)}
-            imagesSrc={post.images}
+            images={post.images}
             content={post.contents}
           />
 
@@ -123,17 +123,17 @@ export default async function PostReportDetail(
             <div className="flex flex-col gap-5">
               <TimelineNewReport reports={REPORTS_1} isDismissed />
               <TimelineMemo
-                author="이승헌"
+                writer="이승헌"
                 createdDate="2025년 7월 22일"
                 memo={`이상한 글 아니에요!!!!\n안녕하세요 :)`}
               />
               <TimelineReportDismiss
-                author="이승헌"
+                writer="이승헌"
                 createdDate="2025년 7월 22일"
               />
               <TimelineNewReport reports={REPORTS_2} />
               <TimelineRestrict
-                author="유예하"
+                writer="유예하"
                 createdDate="2025년 7월 24일"
                 memo="회의 결과 만장일치 제한 결정"
                 isLastTimeline

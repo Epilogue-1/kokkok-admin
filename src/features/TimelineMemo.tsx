@@ -1,14 +1,14 @@
 import { TbQuote } from "react-icons/tb";
 
 interface Props {
-  author: string;
+  writer: string;
   createdDate: string;
   memo: string;
   isLastTimeline?: boolean;
 }
 
 export default function TimelineMemo({
-  author,
+  writer,
   createdDate,
   memo,
   isLastTimeline = false,
@@ -24,7 +24,7 @@ export default function TimelineMemo({
         {/* 작성자 & 작성일 */}
         <div className="flex h-9 items-center gap-2">
           <span>
-            <strong className="font-bold">{author}</strong>님의 메모
+            <strong className="font-bold">{writer}</strong>님의 메모
           </span>
           <span className="text-gray-600">·</span>
           <span className="text-gray-600">{createdDate}</span>

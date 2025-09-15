@@ -2,7 +2,7 @@ import { TbRepeat } from "react-icons/tb";
 
 type InquiryState = "-" | "무시" | "진행중" | "완료";
 interface Props {
-  author: string;
+  writer: string;
   createdDate: string;
   from?: InquiryState;
   to: InquiryState;
@@ -12,7 +12,7 @@ interface Props {
 
 // 상태 변경 타임라인은 문의에서만 사용됨
 export default function TimelineStatusChange({
-  author,
+  writer,
   createdDate,
   from,
   to,
@@ -32,7 +32,7 @@ export default function TimelineStatusChange({
         {/* 작성자 & 상태 변경 내용 & 작성일 */}
         <div className="flex h-9 items-center gap-2">
           <span>
-            <strong className="font-bold">{author}</strong>님이 상태 변경:{" "}
+            <strong className="font-bold">{writer}</strong>님이 상태 변경:{" "}
             <strong className="font-bold">{stateChangeString}</strong>
           </span>
           <span className="text-gray-600">·</span>

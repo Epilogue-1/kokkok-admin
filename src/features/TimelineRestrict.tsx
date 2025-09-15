@@ -1,7 +1,7 @@
 import { TbBarrierBlock } from "react-icons/tb";
 
 interface Props {
-  author: string;
+  writer: string;
   createdDate: string;
   isLastTimeline?: boolean;
   memo?: string;
@@ -9,7 +9,7 @@ interface Props {
 
 // 게시글/댓글 제한 (not for 사용자)
 export default function TimelineRestrict({
-  author,
+  writer,
   createdDate,
   isLastTimeline = false,
   memo,
@@ -25,7 +25,7 @@ export default function TimelineRestrict({
         {/* 작성자 & 작성일 */}
         <div className="flex h-9 items-center gap-2">
           <span>
-            <strong className="font-bold">{author}</strong>님이{" "}
+            <strong className="font-bold">{writer}</strong>님이{" "}
             <strong className="font-bold">제한</strong>
           </span>
 
