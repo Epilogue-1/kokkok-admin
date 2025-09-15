@@ -1,3 +1,4 @@
+import { getCommentById } from "@/api/comment";
 import Badge from "@/components/Badge";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
@@ -9,6 +10,7 @@ import TimelineMemo from "@/features/TimelineMemo";
 import TimelineNewReport from "@/features/TimelineNewReport";
 import TimelineReportDismiss from "@/features/TimelineReportDismiss";
 import TimelineRestrict from "@/features/TimelineRestrict";
+import { formatToKoreanDate } from "@/utils/formatDate";
 
 type ReportType =
   | "부적절한 컨텐츠"
@@ -84,8 +86,11 @@ const REPORTS_2: Report[] = [
   },
 ];
 
-export default function CommentReportDetail() {
-  const isRestricted = true;
+export default async function CommentReportDetail(
+  props: PageProps<"/content-reports/comment/[commentId]">,
+) {
+  const { commentId } = await props.params;
+  const { data: comment } = await getCommentById(commentId);
 
   return (
     <>
@@ -96,7 +101,7 @@ export default function CommentReportDetail() {
           <Title>댓글 신고</Title>
 
           {/* 제한된 댓글이라면 표시 */}
-          {isRestricted && (
+          {comment.banned && (
             <Badge className="mb-2" variant="destructive" content="제한됨" />
           )}
         </div>
@@ -104,10 +109,10 @@ export default function CommentReportDetail() {
         <div className="flex flex-col gap-6">
           {/* 댓글 내용 */}
           <CommentCard
-            authorAvatarSrc="/tmp/profile_avatar.jpg"
-            author="이승헌 (heony704@gmail.com)"
-            createdDate="2025년 1월 2일"
-            content="유튜브 쇼츠 댓글창에서 누가 “내란견 배급견 누구 뽑음?” 이런 분탕 댓글을 도배했는데요. “니 이빨 뽑음” 이라는 대댓이 마음에 들었습니다."
+            authorAvatarSrc={comment.user.avatarUrl}
+            author={`${comment.user.username} (${comment.user.email})`}
+            createdDate={formatToKoreanDate(comment.createdAt)}
+            content={comment.contents}
           />
 
           {/* 신고 이력 */}
