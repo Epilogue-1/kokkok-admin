@@ -6,48 +6,20 @@ import {
   TableRow,
   TableRowItem,
 } from "@/components/Table";
+import { formatToKoreanDate } from "@/utils/formatDate";
 
 interface Comment {
-  content: string;
-  createdDate: string;
-  reportCount: number;
-  isRestricted: boolean;
+  id: string;
+  contents: string;
+  createdAt: string;
+  banned: boolean;
+  reports: { count: number }[];
+}
+interface Props {
+  comments: Comment[];
 }
 
-const COMMENTS: Comment[] = [
-  {
-    content: "튼튼발자님 안녕하세요? 물렁발자입니다.",
-    createdDate: "2025년 7월 21일",
-    reportCount: 0,
-    isRestricted: false,
-  },
-  {
-    content: "진짜 초대박이네요 👍",
-    createdDate: "2025년 7월 21일",
-    reportCount: 2,
-    isRestricted: false,
-  },
-  {
-    content: "맞아 그네 타면서 찍었거든 ㅎㅎ",
-    createdDate: "2025년 7월 21일",
-    reportCount: 0,
-    isRestricted: false,
-  },
-  {
-    content: "얏호 전 체 공 개 너무좋아요 😇",
-    createdDate: "2025년 7월 21일",
-    reportCount: 0,
-    isRestricted: false,
-  },
-  {
-    content: "이제 당신이 글을 언제 올리는지 감시할 수 있어요",
-    createdDate: "2025년 7월 20일",
-    reportCount: 32,
-    isRestricted: true,
-  },
-];
-
-export default function UserCommentTable() {
+export default function UserCommentTable({ comments }: Props) {
   return (
     <Table>
       {/* 표 머리글 */}
@@ -61,22 +33,21 @@ export default function UserCommentTable() {
 
       {/* 표 내용 */}
       <TableBody>
-        {COMMENTS.map((comment, index) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: TODO: 실제 데이터 반영 시 id key 사용하도록 수정
-          <TableRow key={index}>
+        {comments.map((comment) => (
+          <TableRow key={comment.id}>
             {/* 내용 */}
             <TableRowItem className="line-clamp-1 whitespace-pre-wrap text-left">
-              {comment.content}
+              {comment.contents}
             </TableRowItem>
 
             {/* 작성일 */}
             <TableRowItem className="max-w-[130px] text-center">
-              {comment.createdDate}
+              {formatToKoreanDate(comment.createdAt)}
             </TableRowItem>
 
             {/* 신고 */}
             <TableRowItem className="max-w-[80px] text-center">
-              {comment.reportCount}
+              {comment.reports[0].count}
             </TableRowItem>
           </TableRow>
         ))}

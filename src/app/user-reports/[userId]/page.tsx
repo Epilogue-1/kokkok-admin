@@ -1,7 +1,9 @@
+import { getUserComments } from "@/api/comment";
+import { getUserPosts } from "@/api/post";
+import { getUserById, getUserReportsCount } from "@/api/user";
 import Badge from "@/components/Badge";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
-import Pagination from "@/components/Pagination";
 import SubTitle from "@/components/SubTitle";
 import Title from "@/components/Title";
 import ProcessForm from "@/features/ProcessForm";
@@ -13,6 +15,7 @@ import TimelineRestrict from "@/features/TimelineRestrict";
 import UserCommentTable from "@/features/UserCommentTable";
 import UserInformation from "@/features/UserInformation";
 import UserPostTable from "@/features/UserPostTable";
+import { formatToKoreanDate } from "@/utils/formatDate";
 
 type ReportType =
   | "부적절한 컨텐츠"
@@ -88,16 +91,24 @@ const REPORTS_2: Report[] = [
   },
 ];
 
+const COMMENT_PAGE_SIZE = 5;
+const POST_PAGE_SIZE = 5;
+
 export default async function UserReportDetail(
   props: PageProps<"/user-reports/[userId]">,
 ) {
-  const query = await props.searchParams;
+  const { userId } = await props.params;
 
-  const isBanned = true;
-  const postCount = 34;
-  const commentCount = 189;
-
-  const totalPage = 13;
+  const { data: user } = await getUserById(userId);
+  const report = await getUserReportsCount(userId);
+  const { data: comments, total: commentCount } = await getUserComments(
+    userId,
+    { page: 1, pageSize: COMMENT_PAGE_SIZE },
+  );
+  const { data: posts, total: postCount } = await getUserPosts(userId, {
+    page: 1,
+    pageSize: POST_PAGE_SIZE,
+  });
 
   return (
     <>
@@ -108,7 +119,7 @@ export default async function UserReportDetail(
           <Title>사용자 신고</Title>
 
           {/* 퇴출된 사용자라면 표시 */}
-          {isBanned && (
+          {user.banned && (
             <Badge className="mb-2" variant="destructive" content="퇴출됨" />
           )}
         </div>
@@ -120,10 +131,10 @@ export default async function UserReportDetail(
               <SubTitle>프로필</SubTitle>
 
               <ProfileCard
-                avatarSrc="/tmp/profile_avatar.jpg"
-                backgroundSrc="/tmp/profile_background.jpg"
-                name="이승헌"
-                introduction="안녕하세요?"
+                avatar={user.avatarUrl}
+                background={user.backgroundUrl}
+                name={user.username}
+                introduction={user.description}
               />
             </section>
 
@@ -132,9 +143,13 @@ export default async function UserReportDetail(
               <SubTitle>정보</SubTitle>
 
               <UserInformation
-                email="heony704@gmail.com"
-                createdDate="2024년 12월 4일"
-                reportCount={{ user: 7, post: 0, comment: 32 }}
+                email={user.email}
+                createdDate={formatToKoreanDate(user.createdAt)}
+                reportCount={{
+                  user: report.user,
+                  post: report.post,
+                  comment: report.comment,
+                }}
               />
             </section>
           </div>
@@ -148,8 +163,7 @@ export default async function UserReportDetail(
               </div>
 
               <div className="flex flex-col items-center gap-3">
-                <UserPostTable />
-                <Pagination query={query} total={totalPage} />
+                <UserPostTable posts={posts ?? []} />
               </div>
             </section>
 
@@ -161,8 +175,7 @@ export default async function UserReportDetail(
               </div>
 
               <div className="flex flex-col items-center gap-3">
-                <UserCommentTable />
-                <Pagination query={query} total={totalPage} />
+                <UserCommentTable comments={comments ?? []} />
               </div>
             </section>
           </div>
