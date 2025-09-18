@@ -5,9 +5,18 @@ export const formatToKoreanDate = (isoString: string): string => {
     throw new Error("올바르지 않은 날짜 형식입니다.");
   }
 
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+  const year = date.toLocaleString("ko-KR", {
+    year: "numeric",
+    timeZone: "Asia/Seoul",
+  });
+  const month = date.toLocaleString("ko-KR", {
+    month: "numeric",
+    timeZone: "Asia/Seoul",
+  });
+  const day = date.toLocaleString("ko-KR", {
+    day: "numeric",
+    timeZone: "Asia/Seoul",
+  });
 
-  return `${year}년 ${month}월 ${day}일`;
+  return `${year} ${month} ${day}`; // "2025년 9월 16일"
 };
