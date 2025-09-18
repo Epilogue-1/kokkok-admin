@@ -82,6 +82,20 @@ export async function getInquiryById(id: string) {
   return { data: data as unknown as Inquiry };
 }
 
+// id에 맞는 문의 상태를 변경
+export async function updateInquiryStatus(id: string, status: Status) {
+  const supabase = await createClient();
+
+  const { error: updateError } = await supabase
+    .from("inquiry")
+    .update({ status: status })
+    .eq("id", id);
+
+  if (updateError) {
+    throw updateError;
+  }
+}
+
 type InquiryLogType = "memo" | "statusChange";
 interface InquiryLog {
   id: number;
@@ -119,4 +133,70 @@ export async function getInquiryLogsById(id: string) {
     .order("createdAt", { ascending: true });
 
   return { data: data as unknown as InquiryLog[] };
+}
+
+// 문의 메모 로그 추가
+export async function addInquiryMemoLog(id: string, memo: string) {
+  const supabase = await createClient();
+
+  // 관리자 정보 조회
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    throw new Error("관리자 정보를 확인할 수 없습니다.");
+  }
+
+  // 문의 메모에 대한 로그 추가
+  const { error: insertError } = await supabase.from("inquiryLog").insert({
+    inquiryId: id,
+    adminId: user.id,
+    type: "memo",
+    memo,
+  });
+
+  if (insertError) {
+    throw insertError;
+  }
+}
+
+interface StatusChangeOptions {
+  prevStatus: Status;
+  nextStatus: Status;
+  memo?: string;
+}
+
+// 문의 상태 변경 로그 추가
+export async function addInquiryStatusChangeLog(
+  id: string,
+  options: StatusChangeOptions,
+) {
+  const supabase = await createClient();
+  const { prevStatus, nextStatus, memo } = options;
+
+  // 관리자 정보 조회
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    throw new Error("관리자 정보를 확인할 수 없습니다.");
+  }
+
+  // 문의 상태 변경에 대한 로그 추가
+  const { error: insertError } = await supabase.from("inquiryLog").insert({
+    inquiryId: id,
+    adminId: user.id,
+    type: "statusChange",
+    prevStatus,
+    nextStatus,
+    memo,
+  });
+
+  if (insertError) {
+    throw insertError;
+  }
 }

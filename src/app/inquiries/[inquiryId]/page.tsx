@@ -5,9 +5,10 @@ import Main from "@/components/Main";
 import SubTitle from "@/components/SubTitle";
 import Title from "@/components/Title";
 import InquiryCard from "@/features/InquiryCard";
+import InquiryForm from "@/features/InquiryForm";
 import InquiryTimeline from "@/features/InquiryTimeline";
-import ProcessForm from "@/features/ProcessForm";
 import { formatToKoreanDate } from "@/utils/formatDate";
+import { addInquiryLogAction } from "./action";
 
 export default async function InquiryDetail(
   props: PageProps<"/inquiries/[inquiryId]">,
@@ -59,15 +60,19 @@ export default async function InquiryDetail(
           {/* 문의 이력 */}
           <section>
             <SubTitle>문의 이력</SubTitle>
-
             <InquiryTimeline inquiries={inquiryLogs} />
           </section>
 
           {/* 문의 처리 */}
           <section>
             <SubTitle>문의 처리</SubTitle>
-
-            <ProcessForm />
+            <InquiryForm
+              onSubmit={addInquiryLogAction.bind(
+                null,
+                inquiryId,
+                inquiry.status,
+              )}
+            />
           </section>
         </div>
       </Main>
