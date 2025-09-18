@@ -1,11 +1,10 @@
 import { TbRepeat } from "react-icons/tb";
 
-type InquiryState = "-" | "무시" | "진행중" | "완료";
 interface Props {
   writer: string;
   createdDate: string;
-  from?: InquiryState;
-  to: InquiryState;
+  from?: string;
+  to: string;
   memo?: string;
   isLastTimeline?: boolean;
 }

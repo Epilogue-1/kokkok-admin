@@ -50,7 +50,7 @@ export async function getUserName() {
 
   // 관리자 이름 조회
   const { data, error } = await supabase
-    .from("admin")
+    .from("adminData")
     .select("name")
     .eq("userId", user.id)
     .single();

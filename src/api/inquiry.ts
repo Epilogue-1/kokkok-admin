@@ -81,3 +81,42 @@ export async function getInquiryById(id: string) {
 
   return { data: data as unknown as Inquiry };
 }
+
+type InquiryLogType = "memo" | "statusChange";
+interface InquiryLog {
+  id: number;
+  createdAt: string;
+  inquiryId: string;
+  type: InquiryLogType;
+  memo: string | null;
+  prevStatus: Status | null;
+  nextStatus: Status | null;
+  user: {
+    userId: string;
+    name: string;
+  };
+}
+
+// id에 맞는 문의 로그들 조회
+export async function getInquiryLogsById(id: string) {
+  const supabase = await createClient();
+
+  const { data } = await supabase
+    .from("inquiryLog")
+    .select(
+      `
+      id,
+      createdAt,
+      inquiryId,
+      type,
+      memo,
+      prevStatus,
+      nextStatus,
+      user:adminId ( userId, name )
+    `,
+    )
+    .eq("inquiryId", id)
+    .order("createdAt", { ascending: true });
+
+  return { data: data as unknown as InquiryLog[] };
+}

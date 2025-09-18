@@ -1,4 +1,4 @@
-import { getInquiryById } from "@/api/inquiry";
+import { getInquiryById, getInquiryLogsById } from "@/api/inquiry";
 import Badge from "@/components/Badge";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
@@ -15,6 +15,7 @@ export default async function InquiryDetail(
 ) {
   const { inquiryId } = await props.params;
   const { data: inquiry } = await getInquiryById(inquiryId);
+  const { data: inquiryLogs } = await getInquiryLogsById(inquiryId);
 
   const statusLabel = {
     pending: "-",
@@ -61,28 +62,33 @@ export default async function InquiryDetail(
             <SubTitle>문의 이력</SubTitle>
 
             <div className="flex flex-col gap-5">
-              <TimelineMemo
-                writer="유예하"
-                createdDate="2025년 1월 20일"
-                memo="2025/01/20 회의 결과, 진행하기로 결정"
-              />
-              <TimelineStatusChange
-                writer="정민재"
-                createdDate="2025년 2월 2일"
-                to="진행중"
-              />
-              <TimelineMemo
-                writer="정민재"
-                createdDate="2025년 2월 2일"
-                memo={`깃허브 이슈: https://github.com/Epilogue-1/kokkok/issues/176`}
-              />
-              <TimelineStatusChange
-                writer="장준혁"
-                createdDate="2025년 5월 24일"
-                from="진행중"
-                to="완료"
-                isLastTimeline
-              />
+              {inquiryLogs.map((log, index) => {
+                const isLastTimeline = index === inquiryLogs.length - 1;
+
+                if (log.type === "memo") {
+                  return (
+                    <TimelineMemo
+                      key={log.id}
+                      writer={log.user.name}
+                      createdDate={formatToKoreanDate(log.createdAt)}
+                      memo={log.memo ?? ""}
+                      isLastTimeline={isLastTimeline}
+                    />
+                  );
+                }
+
+                return (
+                  <TimelineStatusChange
+                    key={log.id}
+                    writer={log.user.name}
+                    createdDate={formatToKoreanDate(log.createdAt)}
+                    from={log.prevStatus ? statusLabel[log.prevStatus] : ""}
+                    to={log.nextStatus ? statusLabel?.[log.nextStatus] : ""}
+                    memo={log.memo ?? undefined}
+                    isLastTimeline={isLastTimeline}
+                  />
+                );
+              })}
             </div>
           </section>
 
