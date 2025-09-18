@@ -5,9 +5,8 @@ import Main from "@/components/Main";
 import SubTitle from "@/components/SubTitle";
 import Title from "@/components/Title";
 import InquiryCard from "@/features/InquiryCard";
+import InquiryTimeline from "@/features/InquiryTimeline";
 import ProcessForm from "@/features/ProcessForm";
-import TimelineMemo from "@/features/TimelineMemo";
-import TimelineStatusChange from "@/features/TimelineStatusChange";
 import { formatToKoreanDate } from "@/utils/formatDate";
 
 export default async function InquiryDetail(
@@ -61,35 +60,7 @@ export default async function InquiryDetail(
           <section>
             <SubTitle>문의 이력</SubTitle>
 
-            <div className="flex flex-col gap-5">
-              {inquiryLogs.map((log, index) => {
-                const isLastTimeline = index === inquiryLogs.length - 1;
-
-                if (log.type === "memo") {
-                  return (
-                    <TimelineMemo
-                      key={log.id}
-                      writer={log.user.name}
-                      createdDate={formatToKoreanDate(log.createdAt)}
-                      memo={log.memo ?? ""}
-                      isLastTimeline={isLastTimeline}
-                    />
-                  );
-                }
-
-                return (
-                  <TimelineStatusChange
-                    key={log.id}
-                    writer={log.user.name}
-                    createdDate={formatToKoreanDate(log.createdAt)}
-                    from={log.prevStatus ? statusLabel[log.prevStatus] : ""}
-                    to={log.nextStatus ? statusLabel?.[log.nextStatus] : ""}
-                    memo={log.memo ?? undefined}
-                    isLastTimeline={isLastTimeline}
-                  />
-                );
-              })}
-            </div>
+            <InquiryTimeline inquiries={inquiryLogs} />
           </section>
 
           {/* 문의 처리 */}
