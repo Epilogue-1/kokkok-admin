@@ -73,3 +73,17 @@ export async function getUserReportsCount(id: string) {
     comment: commentRes.count,
   } as UserReport;
 }
+
+// 유저 퇴출
+export async function banUser(id: string) {
+  const supabase = await createClient();
+
+  const { error } = await supabase
+    .from("user")
+    .update({ banned: true })
+    .eq("id", id);
+
+  if (error) {
+    throw error;
+  }
+}

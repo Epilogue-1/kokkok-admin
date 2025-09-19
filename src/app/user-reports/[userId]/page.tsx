@@ -7,12 +7,13 @@ import Header from "@/components/Header";
 import Main from "@/components/Main";
 import SubTitle from "@/components/SubTitle";
 import Title from "@/components/Title";
-import ProcessForm from "@/features/ProcessForm";
 import ProfileCard from "@/features/ProfileCard";
 import { UserCommentTable, UserPostTable } from "@/features/table";
 import { UserReportTimeline } from "@/features/timeline";
 import UserInformation from "@/features/UserInformation";
+import UserReportForm from "@/features/UserReportForm";
 import { formatToKoreanDate } from "@/utils/formatDate";
+import { updateReportAction } from "./action";
 
 const COMMENT_PAGE_SIZE = 5;
 const POST_PAGE_SIZE = 5;
@@ -116,7 +117,9 @@ export default async function UserReportDetail(
           {/* 신고 처리 */}
           <section>
             <SubTitle>신고 처리</SubTitle>
-            <ProcessForm />
+            <UserReportForm
+              onSubmit={updateReportAction.bind(null, userId, reports)}
+            />
           </section>
         </div>
       </Main>
