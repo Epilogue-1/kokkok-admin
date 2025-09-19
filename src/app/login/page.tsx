@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import LoginFailAlert from "@/features/LoginFailAlert";
-import LoginForm from "@/features/LoginForm";
+import { LoginFailAlert, LoginForm } from "@/features/login";
 import { loginAction } from "./actions";
 
 export default async function Login(props: PageProps<"/login">) {
