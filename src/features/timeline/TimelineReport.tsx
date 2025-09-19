@@ -23,7 +23,7 @@ interface Props {
   isLastTimeline?: boolean;
 }
 
-export default function TimelineNewReport({
+export default function TimelineReport({
   reports,
   isLastTimeline = false,
 }: Props) {
@@ -40,15 +40,15 @@ export default function TimelineNewReport({
     <div className="flex w-full flex-col">
       <div className="flex gap-5">
         {/* 신고 아이콘 */}
-        <div className="z-10 flex h-9 w-9 items-center justify-center rounded-full bg-red-600">
-          <TbUrgent className="h-5 w-5 text-white" />
+        <div className="z-10 flex h-9 w-9 items-center justify-center rounded-full bg-gray-100">
+          <TbUrgent className="h-5 w-5 text-gray-600" />
         </div>
 
         {/* 신고 개수 & 신고 기간 & 신고 상태 뱃지 */}
         <div className="flex h-9 items-center gap-2">
           <span>
             <strong className="font-bold">{reportCount}</strong>개의{" "}
-            <strong className="font-bold">새로운 신고</strong>
+            <strong className="font-bold">신고</strong>
           </span>
 
           <span className="text-gray-600">·</span>

@@ -1,6 +1,7 @@
 import { formatToKoreanDate } from "@/utils/formatDate";
 import TimelineMemo from "./TimelineMemo";
 import TimelineNewReport from "./TimelineNewReport";
+import TimelineReport from "./TimelineReport";
 import TimelineReportDismiss from "./TimelineReportDismiss";
 import TimelineRestrict from "./TimelineRestrict";
 
@@ -80,7 +81,7 @@ export default function ReportTimeline({ reportLogs, newReports }: Props) {
         }
 
         return (
-          <TimelineNewReport
+          <TimelineReport
             key={log.id}
             reports={log.reports}
             isLastTimeline={isLastTimeline}
