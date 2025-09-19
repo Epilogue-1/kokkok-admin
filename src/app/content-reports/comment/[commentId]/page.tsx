@@ -7,7 +7,7 @@ import SubTitle from "@/components/SubTitle";
 import Title from "@/components/Title";
 import CommentCard from "@/features/CommentCard";
 import ContentReportForm from "@/features/ContentReportForm";
-import { ReportTimeline } from "@/features/timeline";
+import { ContentReportTimeline } from "@/features/timeline";
 import { formatToKoreanDate } from "@/utils/formatDate";
 import { updateReportAction } from "./action";
 
@@ -49,7 +49,10 @@ export default async function CommentReportDetail(
           {/* 신고 이력 */}
           <section>
             <SubTitle>신고 이력</SubTitle>
-            <ReportTimeline reportLogs={reportLogs} newReports={reports} />
+            <ContentReportTimeline
+              reportLogs={reportLogs}
+              newReports={reports}
+            />
           </section>
 
           {/* 신고 처리 */}

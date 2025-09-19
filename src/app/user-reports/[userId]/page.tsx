@@ -10,7 +10,7 @@ import Title from "@/components/Title";
 import ProcessForm from "@/features/ProcessForm";
 import ProfileCard from "@/features/ProfileCard";
 import { UserCommentTable, UserPostTable } from "@/features/table";
-import { ReportTimeline } from "@/features/timeline";
+import { UserReportTimeline } from "@/features/timeline";
 import UserInformation from "@/features/UserInformation";
 import { formatToKoreanDate } from "@/utils/formatDate";
 
@@ -110,7 +110,7 @@ export default async function UserReportDetail(
           {/* 신고 이력 */}
           <section>
             <SubTitle>신고 이력</SubTitle>
-            <ReportTimeline reportLogs={reportLogs} newReports={reports} />
+            <UserReportTimeline reportLogs={reportLogs} newReports={reports} />
           </section>
 
           {/* 신고 처리 */}

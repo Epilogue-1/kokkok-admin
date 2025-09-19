@@ -1,9 +1,9 @@
 import { formatToKoreanDate } from "@/utils/formatDate";
+import TimelineBan from "./TimelineBan";
 import TimelineMemo from "./TimelineMemo";
 import TimelineNewReport from "./TimelineNewReport";
 import TimelineReport from "./TimelineReport";
 import TimelineReportDismiss from "./TimelineReportDismiss";
-import TimelineRestrict from "./TimelineRestrict";
 
 interface Report {
   id: string;
@@ -35,7 +35,7 @@ interface Props {
   newReports: Report[];
 }
 
-export default function ReportTimeline({ reportLogs, newReports }: Props) {
+export default function UserReportTimeline({ reportLogs, newReports }: Props) {
   const hasNewReports = newReports.length > 0;
 
   return (
@@ -58,7 +58,7 @@ export default function ReportTimeline({ reportLogs, newReports }: Props) {
 
         if (log.type === "ban") {
           return (
-            <TimelineRestrict
+            <TimelineBan
               key={log.id}
               writer={log.user.name}
               createdAt={formatToKoreanDate(log.createdAt)}
