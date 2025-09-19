@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { banPost } from "@/api/post";
 import {
   addReportBanLog,
+  addReportCheckLog,
   addReportIgnoreLog,
   addReportMemoLog,
   checkReports,
@@ -44,11 +45,16 @@ export async function updateReportAction(
 
   // 신고 기각
   if (processType === "기각") {
+    // 확인 로그 추가
+    await addReportCheckLog({
+      postId: Number(postId),
+      reports,
+    });
+
     // 기각 로그 추가
     await addReportIgnoreLog({
       postId: Number(postId),
       memo: memoValue,
-      reports,
     });
 
     // 신고 확인 처리
@@ -57,6 +63,12 @@ export async function updateReportAction(
 
   // 게시글 제한
   if (processType === "제한") {
+    // 확인 로그 추가
+    await addReportCheckLog({
+      postId: Number(postId),
+      reports,
+    });
+
     // 제한 로그 추가
     await addReportBanLog({ postId: Number(postId), memo: memoValue });
 
@@ -67,5 +79,5 @@ export async function updateReportAction(
     await checkReports(reports);
   }
 
-  revalidatePath(`/inquiries/${postId}`);
+  revalidatePath(`/content-reports/post/${postId}`);
 }

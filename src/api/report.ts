@@ -234,22 +234,20 @@ export async function addReportMemoLog({
   }
 }
 
-interface IgnoreOptions {
+interface CheckOptions {
   userId?: string;
   postId?: number;
   commentId?: number;
-  memo?: string;
   reports: { id: string; createdAt: string }[];
 }
 
-// 신고 기각 로그 추가
-export async function addReportIgnoreLog({
+// 신고 확인 로그 추가
+export async function addReportCheckLog({
   userId,
   postId,
   commentId,
-  memo,
   reports,
-}: IgnoreOptions) {
+}: CheckOptions) {
   const supabase = await createClient();
 
   // 관리자 정보 조회
@@ -299,6 +297,33 @@ export async function addReportIgnoreLog({
 
   if (insertLogReportsError) {
     throw insertLogReportsError;
+  }
+}
+
+interface IgnoreOptions {
+  userId?: string;
+  postId?: number;
+  commentId?: number;
+  memo?: string;
+}
+
+// 신고 기각 로그 추가
+export async function addReportIgnoreLog({
+  userId,
+  postId,
+  commentId,
+  memo,
+}: IgnoreOptions) {
+  const supabase = await createClient();
+
+  // 관리자 정보 조회
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    throw new Error("관리자 정보를 확인할 수 없습니다.");
   }
 
   // reportLog에 신고 기각 로그 추가

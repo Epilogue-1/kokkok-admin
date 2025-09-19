@@ -81,5 +81,7 @@ export async function banPost(id: number) {
     .update({ banned: true })
     .eq("id", id);
 
-  return error;
+  if (error) {
+    throw error;
+  }
 }
