@@ -6,26 +6,38 @@ import {
   TableRow,
   TableRowItem,
 } from "@/components/Table";
+import { formatToKoreanDate } from "@/utils/formatDate";
 
-type ReportType =
-  | "부적절한 컨텐츠"
-  | "정치·사회적 갈등 유발"
-  | "폭력 조장"
-  | "광고 및 홍보"
-  | "게시글 / 댓글 도배"
-  | "기타";
 interface Report {
-  type: ReportType;
-  content: string;
-  writerEmail: string;
-  reportDate: string;
+  id: string;
+  createdAt: string;
+  reportType:
+    | "Inappropriate"
+    | "Conflict"
+    | "Violence"
+    | "Ads"
+    | "Spam"
+    | "Other";
+  reportContent: string;
+  user: {
+    id: string;
+    email: string;
+  };
 }
-
 interface Props {
   reports: Report[];
 }
 
 export default function ReportTable({ reports }: Props) {
+  const typeLabel: Record<Report["reportType"], string> = {
+    Inappropriate: "부적절한 컨텐츠",
+    Conflict: "정치·사회적 갈등 유발",
+    Violence: "폭력 조장",
+    Ads: "광고 및 홍보",
+    Spam: "게시글 / 댓글 도배",
+    Other: "기타",
+  };
+
   return (
     <Table>
       {/* 표 머리글 */}
@@ -44,27 +56,26 @@ export default function ReportTable({ reports }: Props) {
 
       {/* 표 내용 */}
       <TableBody>
-        {reports.map((report, index) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: TODO: 실제 데이터 반영 시 id key 사용하도록 수정
-          <TableRow key={index}>
+        {reports.map((report) => (
+          <TableRow key={report.id}>
             {/* 타입 */}
             <TableRowItem className="max-w-[150px] text-center">
-              {report.type}
+              {typeLabel[report.reportType]}
             </TableRowItem>
 
             {/* 내용 */}
             <TableRowItem className="whitespace-pre-wrap text-left">
-              {report.content}
+              {report.reportContent}
             </TableRowItem>
 
             {/* 신고자 */}
             <TableRowItem className="max-w-[160px] break-all text-center">
-              {report.writerEmail}
+              {report.user.email}
             </TableRowItem>
 
             {/* 신고일 */}
             <TableRowItem className="max-w-[150px] text-center">
-              {report.reportDate}
+              {formatToKoreanDate(report.createdAt)}
             </TableRowItem>
           </TableRow>
         ))}

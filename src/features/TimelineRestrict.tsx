@@ -2,7 +2,7 @@ import { TbBarrierBlock } from "react-icons/tb";
 
 interface Props {
   writer: string;
-  createdDate: string;
+  createdAt: string;
   isLastTimeline?: boolean;
   memo?: string;
 }
@@ -10,7 +10,7 @@ interface Props {
 // 게시글/댓글 제한 (not for 사용자)
 export default function TimelineRestrict({
   writer,
-  createdDate,
+  createdAt,
   isLastTimeline = false,
   memo,
 }: Props) {
@@ -30,7 +30,7 @@ export default function TimelineRestrict({
           </span>
 
           <span className="text-gray-600">·</span>
-          <span className="text-gray-600">{createdDate}</span>
+          <span className="text-gray-600">{createdAt}</span>
         </div>
       </div>
 

@@ -2,7 +2,7 @@ import { TbRepeat } from "react-icons/tb";
 
 interface Props {
   writer: string;
-  createdDate: string;
+  createdAt: string;
   from?: string;
   to: string;
   memo?: string;
@@ -12,7 +12,7 @@ interface Props {
 // 상태 변경 타임라인은 문의에서만 사용됨
 export default function TimelineStatusChange({
   writer,
-  createdDate,
+  createdAt,
   from,
   to,
   memo,
@@ -35,7 +35,7 @@ export default function TimelineStatusChange({
             <strong className="font-bold">{stateChangeString}</strong>
           </span>
           <span className="text-gray-600">·</span>
-          <span className="text-gray-600">{createdDate}</span>
+          <span className="text-gray-600">{createdAt}</span>
         </div>
       </div>
 

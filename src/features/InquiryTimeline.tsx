@@ -39,7 +39,7 @@ export default function InquiryTimeline({ inquiries }: Props) {
             <TimelineMemo
               key={log.id}
               writer={log.user.name}
-              createdDate={formatToKoreanDate(log.createdAt)}
+              createdAt={formatToKoreanDate(log.createdAt)}
               memo={log.memo ?? ""}
               isLastTimeline={isLastTimeline}
             />
@@ -50,7 +50,7 @@ export default function InquiryTimeline({ inquiries }: Props) {
           <TimelineStatusChange
             key={log.id}
             writer={log.user.name}
-            createdDate={formatToKoreanDate(log.createdAt)}
+            createdAt={formatToKoreanDate(log.createdAt)}
             from={log.prevStatus ? statusLabel[log.prevStatus] : ""}
             to={log.nextStatus ? statusLabel?.[log.nextStatus] : ""}
             memo={log.memo ?? undefined}

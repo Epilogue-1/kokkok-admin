@@ -1,40 +1,41 @@
 import { TbUrgent } from "react-icons/tb";
-import Badge from "@/components/Badge";
 import ReportTable from "@/features/ReportTable";
+import { formatToKoreanDate } from "@/utils/formatDate";
 
-type ReportType =
-  | "부적절한 컨텐츠"
-  | "정치·사회적 갈등 유발"
-  | "폭력 조장"
-  | "광고 및 홍보"
-  | "게시글 / 댓글 도배"
-  | "기타";
 interface Report {
-  type: ReportType;
-  content: string;
-  writerEmail: string;
-  reportDate: string;
+  id: string;
+  createdAt: string;
+  reportType:
+    | "Inappropriate"
+    | "Conflict"
+    | "Violence"
+    | "Ads"
+    | "Spam"
+    | "Other";
+  reportContent: string;
+  user: {
+    id: string;
+    email: string;
+  };
 }
 
 interface Props {
   reports: Report[];
-  isDismissed?: boolean;
   isLastTimeline?: boolean;
 }
 
 export default function TimelineNewReport({
   reports,
-  isDismissed = false,
   isLastTimeline = false,
 }: Props) {
   const reportCount = reports.length;
 
-  const firstReportDate = reports[0].reportDate;
-  const lastReportDate = reports[reports.length - 1].reportDate;
+  const firstReportedAt = reports[0].createdAt;
+  const lastReportedAt = reports[reports.length - 1].createdAt;
   const reportDateString =
     reports.length > 1
-      ? `${firstReportDate} - ${lastReportDate}`
-      : firstReportDate;
+      ? `${formatToKoreanDate(firstReportedAt)} - ${formatToKoreanDate(lastReportedAt)}`
+      : formatToKoreanDate(firstReportedAt);
 
   return (
     <div className="flex w-full flex-col">
@@ -53,8 +54,6 @@ export default function TimelineNewReport({
 
           <span className="text-gray-600">·</span>
           <span className="text-gray-600">{reportDateString}</span>
-
-          {isDismissed && <Badge size="small" content="기각" />}
         </div>
       </div>
 

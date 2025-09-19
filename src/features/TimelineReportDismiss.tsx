@@ -2,14 +2,14 @@ import { TbCancel } from "react-icons/tb";
 
 interface Props {
   writer: string;
-  createdDate: string;
+  createdAt: string;
   isLastTimeline?: boolean;
   memo?: string;
 }
 
 export default function TimelineReportDismiss({
   writer,
-  createdDate,
+  createdAt,
   isLastTimeline = false,
   memo,
 }: Props) {
@@ -29,7 +29,7 @@ export default function TimelineReportDismiss({
           </span>
 
           <span className="text-gray-600">·</span>
-          <span className="text-gray-600">{createdDate}</span>
+          <span className="text-gray-600">{createdAt}</span>
         </div>
       </div>
 

@@ -2,14 +2,14 @@ import { TbQuote } from "react-icons/tb";
 
 interface Props {
   writer: string;
-  createdDate: string;
+  createdAt: string;
   memo: string;
   isLastTimeline?: boolean;
 }
 
 export default function TimelineMemo({
   writer,
-  createdDate,
+  createdAt,
   memo,
   isLastTimeline = false,
 }: Props) {
@@ -27,7 +27,7 @@ export default function TimelineMemo({
             <strong className="font-bold">{writer}</strong>님의 메모
           </span>
           <span className="text-gray-600">·</span>
-          <span className="text-gray-600">{createdDate}</span>
+          <span className="text-gray-600">{createdAt}</span>
         </div>
       </div>
 
