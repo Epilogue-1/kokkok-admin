@@ -171,10 +171,9 @@ interface StatusChangeOptions {
 // 문의 상태 변경 로그 추가
 export async function addInquiryStatusChangeLog(
   id: string,
-  options: StatusChangeOptions,
+  { prevStatus, nextStatus, memo }: StatusChangeOptions,
 ) {
   const supabase = await createClient();
-  const { prevStatus, nextStatus, memo } = options;
 
   // 관리자 정보 조회
   const {

@@ -14,7 +14,7 @@ interface Comment {
   banned: boolean;
 }
 
-// id에 맞는 게시글 조회
+// id에 맞는 댓글 조회
 export async function getCommentById(id: string) {
   const supabase = await createClient();
 
