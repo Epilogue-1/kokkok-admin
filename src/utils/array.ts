@@ -1,10 +1,15 @@
-// value를 문자열 배열로 만들어주는 함수
-export const asArray = (value: string | string[] | undefined): string[] => {
-  if (typeof value === "string") {
-    return [value];
+// value를 배열로 만들어주는 함수
+export const asArray = <T>(value: T | T[] | undefined | null): T[] => {
+  // 배열이면 그대로 반환
+  if (Array.isArray(value)) {
+    return value;
   }
-  if (value === undefined) {
+
+  // 값이 없다면 빈 배열 반환
+  if (value === undefined || value === null) {
     return [];
   }
-  return value;
+
+  // 배열이 아니라면 배열로 만들어서 반환
+  return [value];
 };
