@@ -69,3 +69,17 @@ export async function getUserComments(
 
   return { data: data, total: count };
 }
+
+// 댓글 제한
+export async function banComment(id: number) {
+  const supabase = await createClient();
+
+  const { error } = await supabase
+    .from("comment")
+    .update({ banned: true })
+    .eq("id", id);
+
+  if (error) {
+    throw error;
+  }
+}

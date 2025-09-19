@@ -6,9 +6,10 @@ import Main from "@/components/Main";
 import SubTitle from "@/components/SubTitle";
 import Title from "@/components/Title";
 import CommentCard from "@/features/CommentCard";
-import ProcessForm from "@/features/ProcessForm";
+import ContentReportForm from "@/features/ContentReportForm";
 import { ReportTimeline } from "@/features/timeline";
 import { formatToKoreanDate } from "@/utils/formatDate";
+import { updateReportAction } from "./action";
 
 export default async function CommentReportDetail(
   props: PageProps<"/content-reports/comment/[commentId]">,
@@ -54,8 +55,9 @@ export default async function CommentReportDetail(
           {/* 신고 처리 */}
           <section>
             <SubTitle>신고 처리</SubTitle>
-
-            <ProcessForm />
+            <ContentReportForm
+              onSubmit={updateReportAction.bind(null, commentId, reports)}
+            />
           </section>
         </div>
       </Main>
