@@ -1,8 +1,8 @@
-import TimelineMemo from "@/features/TimelineMemo";
-import TimelineNewReport from "@/features/TimelineNewReport";
-import TimelineReportDismiss from "@/features/TimelineReportDismiss";
-import TimelineRestrict from "@/features/TimelineRestrict";
 import { formatToKoreanDate } from "@/utils/formatDate";
+import TimelineMemo from "./TimelineMemo";
+import TimelineNewReport from "./TimelineNewReport";
+import TimelineReportDismiss from "./TimelineReportDismiss";
+import TimelineRestrict from "./TimelineRestrict";
 
 interface Report {
   id: string;

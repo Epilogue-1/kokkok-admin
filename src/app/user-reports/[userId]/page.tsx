@@ -9,7 +9,7 @@ import SubTitle from "@/components/SubTitle";
 import Title from "@/components/Title";
 import ProcessForm from "@/features/ProcessForm";
 import ProfileCard from "@/features/ProfileCard";
-import ReportTimeline from "@/features/ReportTimeline";
+import { ReportTimeline } from "@/features/timeline";
 import UserCommentTable from "@/features/UserCommentTable";
 import UserInformation from "@/features/UserInformation";
 import UserPostTable from "@/features/UserPostTable";

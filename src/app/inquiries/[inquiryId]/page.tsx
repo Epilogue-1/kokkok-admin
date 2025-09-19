@@ -6,7 +6,7 @@ import SubTitle from "@/components/SubTitle";
 import Title from "@/components/Title";
 import InquiryCard from "@/features/InquiryCard";
 import InquiryForm from "@/features/InquiryForm";
-import InquiryTimeline from "@/features/InquiryTimeline";
+import { InquiryTimeline } from "@/features/timeline";
 import { formatToKoreanDate } from "@/utils/formatDate";
 import { addInquiryLogAction } from "./action";
 

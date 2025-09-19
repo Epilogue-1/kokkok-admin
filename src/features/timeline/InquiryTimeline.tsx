@@ -1,6 +1,6 @@
-import TimelineMemo from "@/features/TimelineMemo";
-import TimelineStatusChange from "@/features/TimelineStatusChange";
 import { formatToKoreanDate } from "@/utils/formatDate";
+import TimelineMemo from "./TimelineMemo";
+import TimelineStatusChange from "./TimelineStatusChange";
 
 type InquiryType = "memo" | "statusChange";
 type Status = "pending" | "ignored" | "processing" | "resolved";

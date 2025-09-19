@@ -7,7 +7,7 @@ import SubTitle from "@/components/SubTitle";
 import Title from "@/components/Title";
 import PostCard from "@/features/PostCard";
 import ProcessForm from "@/features/ProcessForm";
-import ReportTimeline from "@/features/ReportTimeline";
+import { ReportTimeline } from "@/features/timeline";
 import { formatToKoreanDate } from "@/utils/formatDate";
 
 export default async function PostReportDetail(
