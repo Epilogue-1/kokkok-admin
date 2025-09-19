@@ -71,3 +71,15 @@ export async function getUserPosts(
 
   return { data: data, total: count };
 }
+
+// 게시글 제한
+export async function banPost(id: number) {
+  const supabase = await createClient();
+
+  const { error } = await supabase
+    .from("post")
+    .update({ banned: true })
+    .eq("id", id);
+
+  return error;
+}

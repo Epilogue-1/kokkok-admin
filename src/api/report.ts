@@ -99,7 +99,7 @@ export async function getReportById({
       createdAt,
       reportType,
       reportContent,
-      user:reportedId ( id, username, email )
+      user:reporterId ( id, username, email )
     `,
     )
     .is("checked", false);
@@ -113,6 +113,24 @@ export async function getReportById({
   const { data } = await query.order("createdAt", { ascending: true });
 
   return { data: data as unknown as Report[] };
+}
+
+type ReportWithOnlyId = Pick<Report, "id">;
+
+// 신고 확인 처리
+export async function checkReports(reports: ReportWithOnlyId[]) {
+  const supabase = await createClient();
+
+  const ids = reports.map((report) => report.id);
+
+  const { error: updateError } = await supabase
+    .from("report")
+    .update({ checked: true })
+    .in("id", ids);
+
+  if (updateError) {
+    throw updateError;
+  }
 }
 
 interface LogOptions {
@@ -173,4 +191,168 @@ export async function getReportLogsById({
   }));
 
   return { data: normalized as unknown as ReportLog[] };
+}
+
+interface MemoOptions {
+  userId?: string;
+  postId?: number;
+  commentId?: number;
+  memo: string;
+}
+
+// 신고 메모 로그 추가
+export async function addReportMemoLog({
+  userId,
+  postId,
+  commentId,
+  memo,
+}: MemoOptions) {
+  const supabase = await createClient();
+
+  // 관리자 정보 조회
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    throw new Error("관리자 정보를 확인할 수 없습니다.");
+  }
+
+  // 신고 메모에 대한 로그 추가
+  const { error: insertError } = await supabase.from("reportLog").insert({
+    userId,
+    postId,
+    commentId,
+    adminId: user.id,
+    type: "memo",
+    memo,
+  });
+
+  if (insertError) {
+    throw insertError;
+  }
+}
+
+interface IgnoreOptions {
+  userId?: string;
+  postId?: number;
+  commentId?: number;
+  memo?: string;
+  reports: { id: string; createdAt: string }[];
+}
+
+// 신고 기각 로그 추가
+export async function addReportIgnoreLog({
+  userId,
+  postId,
+  commentId,
+  memo,
+  reports,
+}: IgnoreOptions) {
+  const supabase = await createClient();
+
+  // 관리자 정보 조회
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    throw new Error("관리자 정보를 확인할 수 없습니다.");
+  }
+
+  // 기각된 신고들 중 가장 오래된 createdAt 찾기
+  const firstReportedAt = reports.reduce((earliestCreatedAt, report) => {
+    const current = new Date(report.createdAt);
+    const earliest = new Date(earliestCreatedAt);
+    return current < earliest ? report.createdAt : earliestCreatedAt;
+  }, reports[0]?.createdAt ?? "");
+
+  // reportLog에 신고 기각 로그 추가 (기각된 신고 확인용)
+  const { data: reportLogData, error: insertReportsError } = await supabase
+    .from("reportLog")
+    .insert({
+      userId,
+      postId,
+      commentId,
+      adminId: user.id,
+      type: "ignore",
+      occuredAt: firstReportedAt,
+    })
+    .select()
+    .single();
+
+  if (insertReportsError) {
+    throw insertReportsError;
+  }
+
+  // reportLogReports에 여러 행 추가
+  const rowsToInsert = reports.map((report) => ({
+    logId: reportLogData.id,
+    reportId: report.id,
+  }));
+
+  const { error: insertLogReportsError } = await supabase
+    .from("reportLogReports")
+    .insert(rowsToInsert);
+
+  if (insertLogReportsError) {
+    throw insertLogReportsError;
+  }
+
+  // reportLog에 신고 기각 로그 추가
+  const { error: insertIgnoreError } = await supabase.from("reportLog").insert({
+    userId,
+    postId,
+    commentId,
+    adminId: user.id,
+    type: "ignore",
+    memo,
+  });
+
+  if (insertIgnoreError) {
+    throw insertIgnoreError;
+  }
+}
+
+interface BanOptions {
+  userId?: string;
+  postId?: number;
+  commentId?: number;
+  memo?: string;
+}
+
+// 신고 제한 로그 추가
+export async function addReportBanLog({
+  userId,
+  postId,
+  commentId,
+  memo,
+}: BanOptions) {
+  const supabase = await createClient();
+
+  // 관리자 정보 조회
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    throw new Error("관리자 정보를 확인할 수 없습니다.");
+  }
+
+  // reportLog에 신고 제한 로그 추가
+  const { error: insertError } = await supabase.from("reportLog").insert({
+    userId,
+    postId,
+    commentId,
+    adminId: user.id,
+    type: "ban",
+    memo,
+  });
+
+  if (insertError) {
+    throw insertError;
+  }
 }

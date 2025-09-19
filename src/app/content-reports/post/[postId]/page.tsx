@@ -5,10 +5,11 @@ import Header from "@/components/Header";
 import Main from "@/components/Main";
 import SubTitle from "@/components/SubTitle";
 import Title from "@/components/Title";
+import ContentReportForm from "@/features/ContentReportForm";
 import PostCard from "@/features/PostCard";
-import ProcessForm from "@/features/ProcessForm";
 import { ReportTimeline } from "@/features/timeline";
 import { formatToKoreanDate } from "@/utils/formatDate";
+import { updateReportAction } from "./action";
 
 export default async function PostReportDetail(
   props: PageProps<"/content-reports/post/[postId]">,
@@ -53,7 +54,9 @@ export default async function PostReportDetail(
           {/* 신고 처리 */}
           <section>
             <SubTitle>신고 처리</SubTitle>
-            <ProcessForm />
+            <ContentReportForm
+              onSubmit={updateReportAction.bind(null, postId, reports)}
+            />
           </section>
         </div>
       </Main>
