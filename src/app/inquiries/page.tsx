@@ -5,7 +5,7 @@ import Main from "@/components/Main";
 import Pagination from "@/components/Pagination";
 import SortDropdown from "@/components/SortDropdown";
 import Title from "@/components/Title";
-import InquiryTable from "@/features/InquiryTable";
+import { InquiryTable } from "@/features/table";
 import { asArray } from "@/utils/array";
 
 type Type = NonNullable<Parameters<typeof getInquiries>[0]["type"]>[number];

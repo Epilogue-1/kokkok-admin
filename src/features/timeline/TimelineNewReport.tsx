@@ -1,5 +1,5 @@
 import { TbUrgent } from "react-icons/tb";
-import ReportTable from "@/features/ReportTable";
+import { ReportTable } from "@/features/table";
 import { formatToKoreanDate } from "@/utils/formatDate";
 
 interface Report {

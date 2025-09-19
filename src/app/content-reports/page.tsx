@@ -5,7 +5,7 @@ import Main from "@/components/Main";
 import Pagination from "@/components/Pagination";
 import SortDropdown from "@/components/SortDropdown";
 import Title from "@/components/Title";
-import ContentReportTable from "@/features/ContentReportTable";
+import { ContentReportTable } from "@/features/table";
 import { asArray } from "@/utils/array";
 
 type Content = NonNullable<
