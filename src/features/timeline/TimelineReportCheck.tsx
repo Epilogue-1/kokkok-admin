@@ -23,7 +23,7 @@ interface Props {
   isLastTimeline?: boolean;
 }
 
-export default function TimelineReport({
+export default function TimelineReportCheck({
   reports,
   isLastTimeline = false,
 }: Props) {

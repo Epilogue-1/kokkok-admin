@@ -1,7 +1,7 @@
 import { formatToKoreanDate } from "@/utils/formatDate";
 import TimelineMemo from "./TimelineMemo";
 import TimelineNewReport from "./TimelineNewReport";
-import TimelineReport from "./TimelineReport";
+import TimelineReportCheck from "./TimelineReportCheck";
 import TimelineReportDismiss from "./TimelineReportDismiss";
 import TimelineRestrict from "./TimelineRestrict";
 
@@ -25,7 +25,7 @@ interface ReportLog {
   id: string;
   createdAt: string;
   occuredAt: string;
-  type: "memo" | "ignore" | "ban";
+  type: "memo" | "check" | "ignore" | "ban";
   memo: string;
   reports: Report[];
   user: { name: string; userId: string };
@@ -71,7 +71,7 @@ export default function ContentReportTimeline({
           );
         }
 
-        if (log.type === "ignore" && log.reports.length <= 0) {
+        if (log.type === "ignore") {
           return (
             <TimelineReportDismiss
               key={log.id}
@@ -84,7 +84,7 @@ export default function ContentReportTimeline({
         }
 
         return (
-          <TimelineReport
+          <TimelineReportCheck
             key={log.id}
             reports={log.reports}
             isLastTimeline={isLastTimeline}

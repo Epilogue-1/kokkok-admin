@@ -142,7 +142,7 @@ interface ReportLog {
   id: string;
   createdAt: string;
   occuredAt: string;
-  type: "memo" | "ignore" | "ban";
+  type: "memo" | "check" | "ignore" | "ban";
   memo: string;
   reports: Report[];
   user: { name: string; userId: string };
@@ -267,7 +267,7 @@ export async function addReportCheckLog({
     return current < earliest ? report.createdAt : earliestCreatedAt;
   }, reports[0]?.createdAt ?? "");
 
-  // reportLog에 신고 기각 로그 추가 (기각된 신고 확인용)
+  // reportLog에 신고 확인 로그 추가
   const { data: reportLogData, error: insertReportsError } = await supabase
     .from("reportLog")
     .insert({
@@ -275,7 +275,7 @@ export async function addReportCheckLog({
       postId,
       commentId,
       adminId: user.id,
-      type: "ignore",
+      type: "check",
       occuredAt: firstReportedAt,
     })
     .select()
