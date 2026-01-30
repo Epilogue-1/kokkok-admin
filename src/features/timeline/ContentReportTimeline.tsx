@@ -41,6 +41,14 @@ export default function ContentReportTimeline({
 }: Props) {
   const hasNewReports = newReports.length > 0;
 
+  if (reportLogs.length + newReports.length < 1) {
+    return (
+      <div className="flex w-full flex-col items-center rounded-xl bg-gray-50 p-5">
+        <p className="text-gray-300">이력 없음</p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-5">
       {reportLogs.map((log, index) => {

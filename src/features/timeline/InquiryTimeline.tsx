@@ -29,6 +29,14 @@ export default function InquiryTimeline({ inquiries }: Props) {
     resolved: "완료",
   };
 
+  if (inquiries.length < 1) {
+    return (
+      <div className="flex w-full flex-col items-center rounded-xl bg-gray-50 p-5">
+        <p className="text-gray-300">이력 없음</p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-5">
       {inquiries.map((log, index) => {
