@@ -11,6 +11,7 @@ interface Props {
 
 export default function UserReportForm({ onSubmit }: Props) {
   const [processType, setProcessType] = useState<ProcessType>("메모");
+  const [memo, setMemo] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const selectItems: {
@@ -31,14 +32,21 @@ export default function UserReportForm({ onSubmit }: Props) {
 
     try {
       await onSubmit(formData);
+
+      // 폼 초기화
       form.reset();
       setProcessType("메모");
+      setMemo("");
     } catch (error) {
       console.error("신고 처리를 완료하지 못했습니다.", error);
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  const isSubmitDisabled =
+    isSubmitting || // 제출중이거나
+    (processType === "메모" && memo.trim().length === 0); // 메모 처리인데 메모 value가 없거나
 
   return (
     <form
@@ -58,13 +66,20 @@ export default function UserReportForm({ onSubmit }: Props) {
       {/* 메모 입력란 */}
       <textarea
         className="h-[100px] resize-none rounded-lg border border-gray-300 px-3 py-2 placeholder:text-gray-400 focus:border-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-600"
-        placeholder="메모를 남겨주세요. (선택)"
+        // 메모 처리일 때는 메모 value가 필수
+        placeholder={
+          processType === "메모"
+            ? "메모를 남겨주세요."
+            : "메모를 남겨주세요. (선택)"
+        }
         name="memo"
+        value={memo}
+        onChange={(event) => setMemo(event.target.value)}
       />
 
       {/* 처리 버튼 */}
       <div className="ml-auto">
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" disabled={isSubmitDisabled}>
           처리
         </Button>
       </div>
