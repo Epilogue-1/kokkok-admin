@@ -4,20 +4,26 @@ import { useState } from "react";
 import Button from "@/components/Button";
 import Select from "@/components/Select";
 
-type ProcessType = "메모" | "-" | "무시" | "진행중" | "완료";
+type MainProcessType = "메모" | "상태변경";
+type SubProcessType = "-" | "무시" | "진행중" | "완료";
 interface Props {
   onSubmit: (formData: FormData) => Promise<void>;
 }
 
 export default function InquiryForm({ onSubmit }: Props) {
-  const [processType, setProcessType] = useState<ProcessType>("메모");
+  const [mainProcessType, setMainProcessType] =
+    useState<MainProcessType>("메모");
+  const [subProcessType, setSubProcessType] = useState<SubProcessType>("-");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const selectItems: {
-    label: ProcessType;
+  const mainSelectItems: {
+    label: MainProcessType;
+    destructive?: boolean;
+  }[] = [{ label: "메모" }, { label: "상태변경" }];
+  const subSelectItems: {
+    label: SubProcessType;
     destructive?: boolean;
   }[] = [
-    { label: "메모" },
     { label: "-" },
     { label: "무시" },
     { label: "진행중" },
@@ -33,8 +39,10 @@ export default function InquiryForm({ onSubmit }: Props) {
 
     try {
       await onSubmit(formData);
+
       form.reset();
-      setProcessType("메모");
+      setMainProcessType("메모");
+      setSubProcessType("-");
     } catch (error) {
       console.error("문의 처리를 완료하지 못했습니다.", error);
     } finally {
@@ -47,15 +55,30 @@ export default function InquiryForm({ onSubmit }: Props) {
       className="flex flex-col gap-2 rounded-xl border border-gray-300 p-2"
       onSubmit={(event) => handleSubmit(event)}
     >
-      <input type="hidden" name="processType" value={processType} />
       {/* 처리 유형 선택 */}
-      <Select
-        items={selectItems}
-        value={processType}
-        setValue={
-          setProcessType as React.Dispatch<React.SetStateAction<string>>
-        }
-      />
+      <div className="flex gap-2">
+        {/* 대분류 Select */}
+        <input type="hidden" name="mainProcessType" value={mainProcessType} />
+        <Select
+          items={mainSelectItems}
+          value={mainProcessType}
+          setValue={
+            setMainProcessType as React.Dispatch<React.SetStateAction<string>>
+          }
+        />
+
+        {/* 소분류 Select */}
+        <input type="hidden" name="subProcessType" value={subProcessType} />
+        {mainProcessType === "상태변경" && (
+          <Select
+            items={subSelectItems}
+            value={subProcessType}
+            setValue={
+              setSubProcessType as React.Dispatch<React.SetStateAction<string>>
+            }
+          />
+        )}
+      </div>
 
       {/* 메모 입력란 */}
       <textarea

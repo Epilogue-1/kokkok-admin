@@ -14,26 +14,33 @@ const statusMap = {
   완료: "resolved",
 } as const;
 type StatusValue = (typeof statusMap)[keyof typeof statusMap];
-type ProcessType = keyof typeof statusMap | "메모";
+type MainProcessType = "메모" | "상태변경";
+type SubProcessType = keyof typeof statusMap;
 
 export async function addInquiryLogAction(
   inquiryId: string,
   inquiryStatus: StatusValue,
   formData: FormData,
 ) {
-  const processType = String(formData.get("processType") ?? "") as ProcessType;
+  const mainProcessType = String(
+    formData.get("mainProcessType") ?? "",
+  ) as MainProcessType;
+  const subProcessType = String(
+    formData.get("subProcessType") ?? "",
+  ) as SubProcessType;
+
   const memoField = formData.get("memo");
   const memoValue = typeof memoField === "string" ? memoField.trim() : "";
 
   // 문의 메모
-  if (processType === "메모") {
+  if (mainProcessType === "메모") {
     await addInquiryMemoLog(inquiryId, memoValue);
   }
 
   // 문의 상태 변경
-  if (processType !== "메모") {
+  if (mainProcessType === "상태변경") {
     const prevStatus = inquiryStatus;
-    const nextStatus = statusMap[processType];
+    const nextStatus = statusMap[subProcessType];
 
     await updateInquiryStatus(inquiryId, nextStatus);
     await addInquiryStatusChangeLog(inquiryId, {
