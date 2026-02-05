@@ -19,12 +19,16 @@ export async function createClient() {
       setAll(cookiesToSet) {
         try {
           cookiesToSet.forEach(({ name, value, options }) => {
-            cookieStore.set(name, value, options);
+            cookieStore.set(name, value, {
+              ...options,
+              maxAge: undefined,
+              expires: undefined,
+            });
           });
         } catch {
-          // Server Component 안에서 쿠키 설정(setAll) 시도 시, 에러가 발생합니다.
-          // 하지만 Supabase는 Middleware가 세션을 알아서 갱신하기 때문에 에러가 발생해도 괜찮습니다.
-          // 따라서 에러를 무시하기 위해 빈 catch 문이 사용됐습니다.
+          // Server Component 안에서 쿠키 설정(setAll) 시도 시 에러 발생
+          // 하지만 Supabase는 Middleware가 세션을 알아서 갱신하기 때문에 에러 발생해도 괜찮음
+          // 따라서 에러를 무시하기 위해 빈 catch 문 사용
         }
       },
     },
