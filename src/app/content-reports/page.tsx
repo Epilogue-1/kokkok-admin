@@ -1,4 +1,4 @@
-import { getContentReports } from "@/api/report";
+import { getContentReports } from "@/api/report.server";
 import Filter from "@/components/Filter";
 import Header from "@/components/Header";
 import Main from "@/components/Main";

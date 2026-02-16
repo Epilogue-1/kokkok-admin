@@ -5,7 +5,7 @@ import {
   addInquiryMemoLog,
   addInquiryStatusChangeLog,
   updateInquiryStatus,
-} from "@/api/inquiry";
+} from "@/api/inquiry.server";
 
 const statusMap = {
   "-": "pending",

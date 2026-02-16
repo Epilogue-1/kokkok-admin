@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { getUserName, logout } from "@/api/auth";
+import { getUserName, logout } from "@/api/auth.server";
 import LogoutButton from "./LogoutButton";
 import NavigationBar from "./NavigationBar";
 

@@ -7,8 +7,8 @@ import {
   addReportIgnoreLog,
   addReportMemoLog,
   checkReports,
-} from "@/api/report";
-import { banUser } from "@/api/user";
+} from "@/api/report.server";
+import { banUser } from "@/api/user.server";
 
 interface Report {
   id: string;

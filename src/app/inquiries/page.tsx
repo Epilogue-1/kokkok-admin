@@ -1,4 +1,4 @@
-import { getInquiries } from "@/api/inquiry";
+import { getInquiries } from "@/api/inquiry.server";
 import Filter from "@/components/Filter";
 import Header from "@/components/Header";
 import Main from "@/components/Main";

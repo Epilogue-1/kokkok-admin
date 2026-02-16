@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { login } from "@/api/auth";
+import { login } from "@/api/auth.server";
 
 export async function loginAction(formData: FormData) {
   const email = String(formData.get("email") ?? "");

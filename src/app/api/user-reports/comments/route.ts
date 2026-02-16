@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/api/client";
-import { getUserComments } from "@/api/comment";
+import { getUserComments } from "@/api/comment.server";
 import { parsePositiveInt } from "@/utils/int";
 
 // 사용자 댓글들 조회

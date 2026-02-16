@@ -1,4 +1,4 @@
-import type { getUserPosts as getUserPostsServer } from "@/api/post";
+import type { getUserPosts as getUserPostsServer } from "@/api/post.server";
 
 type GetUserPostsResult = Awaited<ReturnType<typeof getUserPostsServer>>;
 interface UserPostOptions {
