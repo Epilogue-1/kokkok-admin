@@ -1,14 +1,14 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { banComment } from "@/api/comment";
+import { banComment } from "@/api/comment.server";
 import {
   addReportBanLog,
   addReportCheckLog,
   addReportIgnoreLog,
   addReportMemoLog,
   checkReports,
-} from "@/api/report";
+} from "@/api/report.server";
 
 interface Report {
   id: string;

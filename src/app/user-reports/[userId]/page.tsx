@@ -1,5 +1,5 @@
-import { getReportById, getReportLogsById } from "@/api/report";
-import { getUserById, getUserReportsCount } from "@/api/user";
+import { getReportById, getReportLogsById } from "@/api/report.server";
+import { getUserById, getUserReportsCount } from "@/api/user.server";
 import Badge from "@/components/Badge";
 import Header from "@/components/Header";
 import Main from "@/components/Main";

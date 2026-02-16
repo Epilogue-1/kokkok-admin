@@ -1,4 +1,4 @@
-import type { getUserComments as getUserCommentsServer } from "@/api/comment";
+import type { getUserComments as getUserCommentsServer } from "@/api/comment.server";
 
 type GetUserCommentsResult = Awaited<ReturnType<typeof getUserCommentsServer>>;
 interface UserCommentOptions {

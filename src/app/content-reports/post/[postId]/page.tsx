@@ -1,5 +1,5 @@
-import { getPostById } from "@/api/post";
-import { getReportById, getReportLogsById } from "@/api/report";
+import { getPostById } from "@/api/post.server";
+import { getReportById, getReportLogsById } from "@/api/report.server";
 import Badge from "@/components/Badge";
 import Header from "@/components/Header";
 import Main from "@/components/Main";

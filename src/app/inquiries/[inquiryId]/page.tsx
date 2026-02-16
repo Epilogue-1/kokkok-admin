@@ -1,4 +1,4 @@
-import { getInquiryById, getInquiryLogsById } from "@/api/inquiry";
+import { getInquiryById, getInquiryLogsById } from "@/api/inquiry.server";
 import Badge from "@/components/Badge";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
