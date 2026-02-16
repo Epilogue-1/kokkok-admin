@@ -2,7 +2,7 @@ import { getInquiries } from "@/api/inquiry";
 import Filter from "@/components/Filter";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
-import Pagination from "@/components/Pagination";
+import QueryPagination from "@/components/QueryPagination";
 import SortDropdown from "@/components/SortDropdown";
 import Title from "@/components/Title";
 import { InquiryTable } from "@/features/table";
@@ -82,7 +82,7 @@ export default async function Inquiries(props: PageProps<"/inquiries">) {
 
         {/* 페이지네이션 */}
         <div className="mt-3 flex w-full justify-center">
-          <Pagination query={query} total={totalPages} />
+          <QueryPagination query={query} total={totalPages} />
         </div>
       </Main>
     </>
