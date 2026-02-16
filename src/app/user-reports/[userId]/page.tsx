@@ -1,5 +1,3 @@
-import { getUserComments } from "@/api/comment";
-import { getUserPosts } from "@/api/post";
 import { getReportById, getReportLogsById } from "@/api/report";
 import { getUserById, getUserReportsCount } from "@/api/user";
 import Badge from "@/components/Badge";
@@ -8,15 +6,13 @@ import Main from "@/components/Main";
 import SubTitle from "@/components/SubTitle";
 import Title from "@/components/Title";
 import ProfileCard from "@/features/ProfileCard";
-import { UserCommentTable, UserPostTable } from "@/features/table";
 import { UserReportTimeline } from "@/features/timeline";
+import UserCommentSection from "@/features/UserCommentSection";
 import UserInformation from "@/features/UserInformation";
+import UserPostSection from "@/features/UserPostSection";
 import UserReportForm from "@/features/UserReportForm";
 import { formatToKoreanDate } from "@/utils/formatDate";
 import { updateReportAction } from "./action";
-
-const COMMENT_PAGE_SIZE = 5;
-const POST_PAGE_SIZE = 5;
 
 export default async function UserReportDetail(
   props: PageProps<"/user-reports/[userId]">,
@@ -25,14 +21,6 @@ export default async function UserReportDetail(
 
   const { data: user } = await getUserById(userId);
   const report = await getUserReportsCount(userId);
-  const { data: comments, total: commentCount } = await getUserComments(
-    userId,
-    { page: 1, pageSize: COMMENT_PAGE_SIZE },
-  );
-  const { data: posts, total: postCount } = await getUserPosts(userId, {
-    page: 1,
-    pageSize: POST_PAGE_SIZE,
-  });
   const { data: reports } = await getReportById({ userId: userId });
   const { data: reportLogs } = await getReportLogsById({
     userId: userId,
@@ -83,29 +71,11 @@ export default async function UserReportDetail(
           </div>
 
           <div className="flex w-full gap-8">
-            {/* 사용자가 작성한 게시글 목록 */}
-            <section className="flex-1">
-              <div className="flex items-center gap-3">
-                <SubTitle>작성한 게시글</SubTitle>
-                <span className="mb-1 text-primary-600">{postCount}</span>
-              </div>
+            {/* 사용자가 작성한 게시글들 */}
+            <UserPostSection userId={userId} />
 
-              <div className="flex flex-col items-center gap-3">
-                <UserPostTable posts={posts ?? []} />
-              </div>
-            </section>
-
-            {/* 사용자가 작성한 댓글 목록 */}
-            <section className="flex-1">
-              <div className="flex items-center gap-3">
-                <SubTitle>작성한 댓글</SubTitle>
-                <span className="mb-1 text-primary-600">{commentCount}</span>
-              </div>
-
-              <div className="flex flex-col items-center gap-3">
-                <UserCommentTable comments={comments ?? []} />
-              </div>
-            </section>
+            {/* 사용자가 작성한 댓글들 */}
+            <UserCommentSection userId={userId} />
           </div>
 
           {/* 신고 이력 */}
