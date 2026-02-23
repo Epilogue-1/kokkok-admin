@@ -15,7 +15,7 @@ export default function LoginForm({ ...props }: Props) {
       </div>
 
       {/* 비밀번호 입력창 */}
-      <div className="mt-4 flex flex-col gap-1">
+      <div className="mt-2 flex flex-col gap-1">
         <label className="font-semibold text-sm" htmlFor="password">
           비밀번호
         </label>
@@ -29,7 +29,7 @@ export default function LoginForm({ ...props }: Props) {
       </div>
 
       {/* 로그인 버튼 */}
-      <div className="mt-8">
+      <div className="mt-4">
         <Button size="large" type="submit">
           로그인
         </Button>

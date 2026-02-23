@@ -8,7 +8,7 @@ export default async function Login(props: PageProps<"/login">) {
   const isLoginFail = query.status === "fail";
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-8">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-6 px-5">
       {/* 로고 */}
       <header>
         <Link
@@ -26,7 +26,7 @@ export default async function Login(props: PageProps<"/login">) {
         </Link>
       </header>
 
-      <main className="flex w-full max-w-md flex-col gap-8">
+      <main className="flex w-full max-w-md flex-col gap-4">
         {/* 로그인 폼 */}
         <LoginForm action={loginAction} />
 
