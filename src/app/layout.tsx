@@ -5,6 +5,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "콕콕 어드민",
   description: "특별히 발탁된 정예 관리자들을 위한 콕콕 어드민 웹",
+  manifest: "/manifest.webmanifest",
 };
 
 const pretendard = localFont({
