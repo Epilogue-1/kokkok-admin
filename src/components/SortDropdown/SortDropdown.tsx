@@ -55,7 +55,10 @@ export default function SortDropdown({ items }: Props) {
   );
 
   return (
-    <div className="relative w-[120px]" ref={dropdownRef}>
+    <div
+      className="relative w-[100px] shrink-0 text-sm md:w-[120px] md:text-base"
+      ref={dropdownRef}
+    >
       {/* 트리거 */}
       <Trigger onClick={toggleMenu}>{currentLabel}</Trigger>
 

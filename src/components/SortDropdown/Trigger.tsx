@@ -9,7 +9,7 @@ interface Props extends React.PropsWithChildren {
 export default function Trigger({ onClick, children }: Props) {
   return (
     <button
-      className="flex h-9 w-full cursor-pointer items-center rounded-lg border border-gray-300 bg-white pr-2 pl-3 transition-colors hover:bg-gray-100 active:bg-gray-200"
+      className="flex h-8 w-full cursor-pointer items-center rounded-lg border border-gray-300 bg-white pr-1 pl-2 transition-colors hover:bg-gray-100 active:bg-gray-200 md:h-9 md:pr-2 md:pl-3"
       type="button"
       onClick={onClick}
     >

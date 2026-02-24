@@ -39,7 +39,7 @@ export default async function UserReports(props: PageProps<"/user-reports">) {
       <Main>
         <Title>사용자 신고</Title>
 
-        <div className="flex items-end justify-between">
+        <div className="flex items-center justify-between gap-2 md:items-end">
           {/* 필터 */}
           <Filter
             query={query}

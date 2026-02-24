@@ -55,7 +55,7 @@ export default function Filter({ query, queryKey, items }: Props) {
   };
 
   return (
-    <div className="flex gap-2">
+    <div className="flex shrink-0 gap-1.5 md:gap-2">
       {items.map((item, index) => (
         <FilterItem
           key={`${item.value} ${index}`}
