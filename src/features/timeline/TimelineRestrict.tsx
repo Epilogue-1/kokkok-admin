@@ -18,19 +18,20 @@ export default function TimelineRestrict({
     <div className="flex w-full flex-col">
       <div className="flex gap-5">
         {/* 제한 아이콘 */}
-        <div className="z-10 flex h-9 w-9 items-center justify-center rounded-full bg-gray-100">
+        <div className="z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-100">
           <TbBarrierBlock className="h-5 w-5 text-gray-600" />
         </div>
 
         {/* 작성자 & 작성일 */}
-        <div className="flex h-9 items-center gap-2">
+        <div className="flex min-h-9 flex-wrap items-center gap-x-2">
           <span>
             <strong className="font-bold">{writer}</strong>님이{" "}
             <strong className="font-bold">제한</strong>
           </span>
-
-          <span className="text-gray-600">·</span>
-          <span className="text-gray-600">{createdAt}</span>
+          <div className="flex items-center gap-2 text-gray-400">
+            <span>·</span>
+            <span>{createdAt}</span>
+          </div>
         </div>
       </div>
 
