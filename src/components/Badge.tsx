@@ -13,7 +13,7 @@ export default function Badge({
   size = "medium",
   content,
 }: Props) {
-  const baseStyle = "rounded-sm leading-none";
+  const baseStyle = "shrink-0 whitespace-nowrap rounded-sm leading-none";
 
   const varientStyle: Record<BadgeVariant, string> = {
     default: "bg-gray-100 text-gray-600",
