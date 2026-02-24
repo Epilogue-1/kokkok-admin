@@ -40,8 +40,8 @@ export default async function UserReportDetail(
           )}
         </div>
 
-        <div className="flex flex-col gap-6">
-          <div className="flex w-full gap-8">
+        <div className="flex flex-col gap-8">
+          <div className="flex w-full flex-col gap-8 md:flex-row">
             {/* 사용자 프로필 */}
             <section className="flex-1">
               <SubTitle>프로필</SubTitle>
@@ -70,7 +70,7 @@ export default async function UserReportDetail(
             </section>
           </div>
 
-          <div className="flex w-full gap-8">
+          <div className="flex w-full flex-col gap-8 md:flex-row">
             {/* 사용자가 작성한 게시글들 */}
             <UserPostSection userId={userId} />
 
