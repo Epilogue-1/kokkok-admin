@@ -29,9 +29,9 @@ export default function PostCard({
         />
 
         {/* 작성자 & 작성일 */}
-        <div className="flex flex-col">
-          <span>{writerName}</span>
-          <span className="text-gray-600 text-sm">{createdDate}</span>
+        <div className="flex min-w-0 flex-col">
+          <span className="truncate">{writerName}</span>
+          <span className="truncate text-gray-600 text-sm">{createdDate}</span>
         </div>
       </div>
 
