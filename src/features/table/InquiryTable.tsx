@@ -39,9 +39,10 @@ export default function InquiryTable({ inquiries }: Props) {
       {/* 표 내용 */}
       <div className="flex flex-col border-gray-200 border-t md:border-none">
         {inquiries.map((inquiry) => (
-          <div
+          <Link
             key={inquiry.id}
-            className="flex w-full flex-row items-center justify-between gap-3 border-gray-200 border-b px-2 py-2 transition-colors hover:bg-gray-50 active:bg-gray-100 md:h-10 md:px-3 md:py-0"
+            href={`/inquiries/${inquiry.id}`}
+            className="group flex w-full flex-row items-center justify-between gap-3 border-gray-200 border-b px-2 py-2 transition-colors hover:bg-gray-50 active:bg-gray-100 md:h-10 md:px-3 md:py-0"
           >
             <div className="flex min-w-0 flex-1 flex-col md:flex-row md:items-center md:gap-3">
               <div className="flex min-w-0 flex-1 items-center gap-2 md:gap-3">
@@ -51,13 +52,8 @@ export default function InquiryTable({ inquiries }: Props) {
                 </div>
 
                 {/* 내용 */}
-                <div className="min-w-0 flex-1">
-                  <Link
-                    href={`/inquiries/${inquiry.id}`}
-                    className="block truncate text-left font-medium text-base hover:underline md:font-normal"
-                  >
-                    {inquiry.content}
-                  </Link>
+                <div className="flex-1 truncate text-left font-medium text-base group-hover:underline md:font-normal">
+                  {inquiry.content}
                 </div>
               </div>
 
@@ -71,11 +67,11 @@ export default function InquiryTable({ inquiries }: Props) {
 
             {/* 처리 상태 */}
             <div className="flex w-13 shrink-0 items-center justify-center md:w-[100px]">
-              <span className="inline-block whitespace-nowrap rounded-lg bg-gray-100 px-2 py-1 font-semibold text-gray-600 text-sm md:rounded-none md:bg-transparent md:p-0 md:font-normal md:text-base md:text-black">
+              <span className="whitespace-nowrap rounded-lg bg-gray-100 px-2 py-1 font-semibold text-gray-600 text-sm md:rounded-none md:bg-transparent md:p-0 md:font-normal md:text-base md:text-black">
                 {statusLabel[inquiry.status]}
               </span>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
