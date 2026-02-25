@@ -29,8 +29,8 @@ export default function Carousel({ imagesSrc }: Props) {
   };
 
   return (
-    <div className="flex flex-col items-center gap-3">
-      <div className="flex items-center gap-8">
+    <div className="mx-auto flex w-full max-w-[450px] flex-col items-center gap-3">
+      <div className="flex w-full items-center justify-center gap-2 md:gap-4">
         {/* 이전 버튼 */}
         <NavigationButton
           direction="prev"
@@ -39,21 +39,22 @@ export default function Carousel({ imagesSrc }: Props) {
         />
 
         {/* 사진들 */}
-        <div className="relative h-[320px] w-[320px] overflow-hidden">
+        <div className="relative aspect-square max-w-[320px] flex-1 overflow-hidden">
           <div
-            className="flex transition-transform duration-500 ease-in-out"
+            className="flex h-full transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${(currentPage - 1) * 100}%)` }}
           >
             {imagesSrc.map((src, index) => (
-              <Image
-                // biome-ignore lint/suspicious/noArrayIndexKey: 단순 반복 UI라 index key 사용해도 안전함
-                key={index}
-                className="shrink-0 select-none"
-                src={src}
-                alt={`게시글 사진 ${index + 1}`}
-                width={320}
-                height={320}
-              />
+              // biome-ignore lint/suspicious/noArrayIndexKey: 단순 반복 UI라 index key 사용해도 안전함
+              <div key={index} className="relative h-full w-full shrink-0">
+                <Image
+                  className="select-none object-cover"
+                  src={src}
+                  alt={`게시글 사진 ${index + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 320px"
+                />
+              </div>
             ))}
           </div>
         </div>

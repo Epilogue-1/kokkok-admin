@@ -46,9 +46,9 @@ export default async function ContentReports(
       <Main>
         <Title>게시글/댓글 신고</Title>
 
-        <div className="flex items-end">
+        <div className="flex items-center justify-between gap-2 md:items-end">
           {/* 필터 */}
-          <div className="flex grow items-center gap-3">
+          <div className="flex grow items-center gap-2 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] md:gap-3 [&::-webkit-scrollbar]:hidden">
             <Filter
               query={query}
               queryKey="content"
@@ -57,7 +57,7 @@ export default async function ContentReports(
                 { label: "댓글", value: "comment" },
               ]}
             />
-            <div className="h-5 w-[1px] bg-gray-300" />
+            <div className="h-5 w-[1px] shrink-0 bg-gray-300" />
             <Filter
               query={query}
               queryKey="status"

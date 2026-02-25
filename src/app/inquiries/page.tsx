@@ -40,9 +40,9 @@ export default async function Inquiries(props: PageProps<"/inquiries">) {
       <Main>
         <Title>문의</Title>
 
-        <div className="flex items-end justify-between">
+        <div className="flex items-center justify-between gap-2 md:items-end">
           {/* 필터 */}
-          <div className="flex grow items-center gap-3">
+          <div className="flex grow items-center gap-2 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] md:gap-3 [&::-webkit-scrollbar]:hidden">
             <Filter
               query={query}
               queryKey="type"
@@ -53,7 +53,7 @@ export default async function Inquiries(props: PageProps<"/inquiries">) {
                 { label: "기타", value: "other" },
               ]}
             />
-            <div className="h-5 w-[1px] bg-gray-300" />
+            <div className="h-5 w-[1px] shrink-0 bg-gray-300" />
             <Filter
               query={query}
               queryKey="status"

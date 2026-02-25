@@ -1,11 +1,3 @@
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableHeadItem,
-  TableRow,
-  TableRowItem,
-} from "@/components/Table";
 import { formatToKoreanDate } from "@/utils/formatDate";
 
 interface Report {
@@ -39,47 +31,47 @@ export default function ReportTable({ reports }: Props) {
   };
 
   return (
-    <Table>
-      {/* 표 머리글 */}
-      <TableHead>
-        <TableHeadItem className="max-w-[150px] text-center">
-          타입
-        </TableHeadItem>
-        <TableHeadItem className="text-center">내용</TableHeadItem>
-        <TableHeadItem className="max-w-[160px] text-center">
-          신고자
-        </TableHeadItem>
-        <TableHeadItem className="max-w-[150px] text-center">
-          신고일
-        </TableHeadItem>
-      </TableHead>
+    <div className="w-full min-w-0 border-gray-400">
+      {/* 표 머리글 (PC 전용) */}
+      <div className="hidden h-9 w-full items-center gap-3 border-gray-400 border-b bg-gray-100 px-3 font-bold text-sm md:flex">
+        <div className="w-[150px] text-center">타입</div>
+        <div className="flex-1 text-center">내용</div>
+        <div className="w-[160px] text-center">신고자</div>
+        <div className="w-[150px] text-center">신고일</div>
+      </div>
 
       {/* 표 내용 */}
-      <TableBody>
+      <div className="flex flex-col border-gray-200 border-t md:border-none">
         {reports.map((report) => (
-          <TableRow key={report.id}>
+          <div
+            key={report.id}
+            className="flex w-full flex-col border-gray-200 border-b px-2 py-2 md:min-h-10 md:flex-row md:items-center md:gap-3 md:px-3 md:py-0"
+          >
             {/* 타입 */}
-            <TableRowItem className="max-w-[150px] text-center">
+            <div className="text-gray-500 text-sm md:w-[150px] md:text-center md:text-base md:text-black">
               {typeLabel[report.reportType]}
-            </TableRowItem>
+            </div>
 
             {/* 내용 */}
-            <TableRowItem className="whitespace-pre-wrap text-left">
+            <div className="flex-1 text-left text-base">
               {report.reportContent}
-            </TableRowItem>
+            </div>
 
-            {/* 신고자 */}
-            <TableRowItem className="max-w-[160px] break-all text-center">
-              {report.user.email}
-            </TableRowItem>
-
-            {/* 신고일 */}
-            <TableRowItem className="max-w-[150px] text-center">
-              {formatToKoreanDate(report.createdAt)}
-            </TableRowItem>
-          </TableRow>
+            <div className="flex items-center gap-2 whitespace-nowrap text-gray-500 text-sm md:gap-3 md:text-base md:text-black">
+              {/* 신고자 */}
+              <div className="truncate md:w-[160px] md:text-center">
+                {report.user.email}
+              </div>
+              {/* 세로 구분선 (모바일 전용) */}
+              <div className="h-3 w-[1px] shrink-0 bg-gray-300 md:hidden" />
+              {/* 최근 신고일 */}
+              <div className="md:w-[150px] md:text-center">
+                {formatToKoreanDate(report.createdAt)}
+              </div>
+            </div>
+          </div>
         ))}
-      </TableBody>
-    </Table>
+      </div>
+    </div>
   );
 }

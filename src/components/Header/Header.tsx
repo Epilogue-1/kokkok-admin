@@ -39,10 +39,10 @@ export default async function Header({ currentNav }: Props) {
   }
 
   return (
-    <header className="flex h-13 justify-center border-gray-300 border-b">
-      <div className="flex h-full w-full max-w-[1240px] items-center gap-5 px-5">
+    <header className="flex h-21 justify-center border-gray-300 border-b md:h-13">
+      <div className="flex h-full w-full max-w-[1240px] flex-wrap content-center items-center justify-between gap-x-5 gap-y-2 px-5 md:flex-nowrap">
         {/* 콕콕 로고 */}
-        <Link href={"/"}>
+        <Link className="order-1" href={"/"}>
           <Image
             src="/logo.svg"
             alt="콕콕 로고"
@@ -52,11 +52,8 @@ export default async function Header({ currentNav }: Props) {
           />
         </Link>
 
-        {/* 네비게이션 메뉴 */}
-        <NavigationBar allNav={navs} currentNav={currentNav} />
-
         {/* 사용자 메뉴 */}
-        <div className="flex items-center gap-3">
+        <div className="order-2 flex items-center gap-1 md:order-3 md:gap-3">
           <span className="mx-2 text-sm">
             관리자 <strong className="font-semibold">{userName}</strong>
           </span>
@@ -65,6 +62,13 @@ export default async function Header({ currentNav }: Props) {
 
           <LogoutButton logoutAction={logoutAction} />
         </div>
+
+        {/* 네비게이션 메뉴 */}
+        <NavigationBar
+          className="order-3 w-full items-center md:order-2 md:w-fit"
+          allNav={navs}
+          currentNav={currentNav}
+        />
       </div>
     </header>
   );

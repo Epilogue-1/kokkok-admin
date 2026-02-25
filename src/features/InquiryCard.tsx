@@ -17,32 +17,30 @@ export default function InquiryCard({
   content,
 }: Props) {
   return (
-    <div className="flex flex-col gap-2.5 rounded-2xl border border-gray-300 px-4 py-3">
-      <div className="flex items-center justify-between">
-        {/* 문의 타입 */}
-        <Badge content={type} />
-
-        <div className="flex gap-5 text-gray-600">
-          {/* 문의자 */}
-          <div className="flex items-center gap-1">
-            <TbUser className="text-gray-400 text-lg" />
-            <span>{writer}</span>
-          </div>
-          {/* 문의 날짜 */}
-          <div className="flex items-center gap-1">
-            <TbCalendar className="text-gray-400 text-lg" />
-            <span>{createdDate}</span>
-          </div>
-          {/* 답장받을 이메일 */}
-          <div className="flex items-center gap-1">
-            <TbMail className="text-gray-400 text-lg" />
-            <span>{email}</span>
-          </div>
-        </div>
-      </div>
+    <div className="flex flex-col items-start gap-2.5 rounded-2xl border border-gray-300 px-4 py-3">
+      {/* 문의 타입 */}
+      <Badge content={type} />
 
       {/* 문의 내용 */}
       <p className="whitespace-pre-wrap">{content}</p>
+
+      <div className="flex w-full flex-col items-end justify-end gap-x-5 text-gray-400 md:flex-row">
+        {/* 문의자 */}
+        <div className="flex min-w-0 items-center gap-1">
+          <TbUser className="shrink-0 text-gray-400 text-lg" />
+          <span className="truncate">{writer}</span>
+        </div>
+        {/* 문의 날짜 */}
+        <div className="flex min-w-0 items-center gap-1">
+          <TbCalendar className="shrink-0 text-gray-400 text-lg" />
+          <span className="truncate">{createdDate}</span>
+        </div>
+        {/* 답장받을 이메일 */}
+        <div className="flex min-w-0 items-center gap-1">
+          <TbMail className="shrink-0 text-gray-400 text-lg" />
+          <span className="truncate">{email}</span>
+        </div>
+      </div>
     </div>
   );
 }

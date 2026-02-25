@@ -28,7 +28,7 @@ export default function PaginationPrevious({
   href,
   onClick,
 }: Props) {
-  const bigStyle = "h-8 w-8 mr-3 text-lg";
+  const bigStyle = "h-7 w-7 mr-2 text-base md:h-8 md:w-8 md:mr-3 md:text-lg";
   const smallStyle = "h-6 w-6 mr-1 text-sm";
 
   if (as === "link") {
