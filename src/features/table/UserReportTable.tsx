@@ -37,7 +37,7 @@ export default function UserReportTable({ reports }: Props) {
         {reports.map((report) => (
           <div
             key={report.reportedUser.id}
-            className="flex w-full flex-row items-center justify-between gap-4 border-gray-200 border-b px-3 py-2 transition-colors hover:bg-gray-50 active:bg-gray-100 md:h-10 md:py-0"
+            className="flex w-full flex-row items-center justify-between gap-3 border-gray-200 border-b px-2 py-2 transition-colors hover:bg-gray-50 active:bg-gray-100 md:h-10 md:px-3 md:py-0"
           >
             <div className="flex min-w-0 flex-1 flex-col md:flex-row md:items-center md:gap-3">
               {/* 사용자 */}
@@ -50,7 +50,7 @@ export default function UserReportTable({ reports }: Props) {
                 </Link>
               </div>
 
-              <div className="flex items-center gap-2 text-gray-500 text-sm md:text-base md:text-black">
+              <div className="flex items-center gap-2 text-gray-500 text-sm md:gap-3 md:text-base md:text-black">
                 {/* 신고 수 */}
                 <div className="md:w-[80px] md:text-center">
                   <span className="mr-1 inline-block md:hidden">신고 </span>
@@ -66,7 +66,7 @@ export default function UserReportTable({ reports }: Props) {
             </div>
 
             {/* 처리 상태 */}
-            <div className="flex shrink-0 items-center justify-end md:w-[100px] md:justify-center">
+            <div className="flex w-11 shrink-0 items-center justify-center md:w-[100px]">
               <span className="inline-block whitespace-nowrap rounded-lg bg-gray-100 px-2 py-1 font-semibold text-gray-600 text-sm md:rounded-none md:bg-transparent md:p-0 md:font-normal md:text-base md:text-black">
                 {statusLabel[report.reportStatus]}
               </span>
