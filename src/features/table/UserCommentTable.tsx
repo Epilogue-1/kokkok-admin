@@ -30,7 +30,7 @@ export default function UserCommentTable({ comments }: Props) {
           >
             <div className="flex min-w-0 flex-1 flex-col md:flex-row md:items-center md:gap-3">
               {/* 내용 */}
-              <div className="flex-1 truncate text-left font-normal text-base">
+              <div className="flex-1 truncate text-left text-base">
                 {comment.contents}
               </div>
 

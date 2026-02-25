@@ -31,7 +31,7 @@ export default function UserPostTable({ posts }: Props) {
             <div className="flex min-w-0 flex-1 flex-col md:flex-row md:items-center md:gap-3">
               {/* 내용: 게시글 글 내용이 없다면 (없음)이라고 표시 */}
               <div
-                className={`${post.contents.length > 0 ? "" : "text-gray-400"} flex-1 truncate text-left font-normal text-base`}
+                className={`${post.contents.length > 0 ? "" : "text-gray-400"} flex-1 truncate text-left text-base`}
               >
                 {post.contents.length > 0 ? post.contents : "(없음)"}
               </div>
