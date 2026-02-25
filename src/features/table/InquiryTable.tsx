@@ -1,12 +1,4 @@
 import Link from "next/link";
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableHeadItem,
-  TableRow,
-  TableRowItem,
-} from "@/components/Table";
 import { formatToKoreanDate } from "@/utils/formatDate";
 
 interface Inquiry {
@@ -35,55 +27,57 @@ export default function InquiryTable({ inquiries }: Props) {
   };
 
   return (
-    <Table>
-      {/* 표 머리글 */}
-      <TableHead>
-        <TableHeadItem className="max-w-[100px] text-center">
-          타입
-        </TableHeadItem>
-        <TableHeadItem className="text-center">내용</TableHeadItem>
-        <TableHeadItem className="max-w-[150px] text-center">
-          작성일
-        </TableHeadItem>
-        <TableHeadItem className="max-w-[100px] text-center">
-          처리 상태
-        </TableHeadItem>
-      </TableHead>
+    <div className="w-full border-gray-400">
+      {/* 표 머리글 (PC 전용) */}
+      <div className="hidden h-9 w-full items-center gap-3 border-gray-400 border-b bg-gray-100 px-3 font-bold text-sm md:flex">
+        <div className="w-[100px] text-center">타입</div>
+        <div className="flex-1 text-center">내용</div>
+        <div className="w-[150px] text-center">작성일</div>
+        <div className="w-[100px] text-center">처리 상태</div>
+      </div>
 
       {/* 표 내용 */}
-      <TableBody>
+      <div className="flex flex-col border-gray-200 border-t md:border-none">
         {inquiries.map((inquiry) => (
-          <TableRow
+          <div
             key={inquiry.id}
-            className="hover:bg-gray-50 active:bg-gray-100"
+            className="flex w-full flex-row items-center justify-between gap-3 border-gray-200 border-b px-2 py-2 transition-colors hover:bg-gray-50 active:bg-gray-100 md:h-10 md:px-3 md:py-0"
           >
-            {/* 타입 */}
-            <TableRowItem className="max-w-[100px] text-center">
-              {typeLabel[inquiry.type]}
-            </TableRowItem>
+            <div className="flex min-w-0 flex-1 flex-col md:flex-row md:items-center md:gap-3">
+              <div className="flex min-w-0 flex-1 items-center gap-2 md:gap-3">
+                {/* 타입 */}
+                <div className="text-gray-500 text-sm leading-none md:w-[100px] md:text-center md:text-base md:text-black">
+                  {typeLabel[inquiry.type]}
+                </div>
 
-            {/* 내용 */}
-            <TableRowItem>
-              <Link
-                className="line-clamp-1 w-full whitespace-pre-wrap text-left hover:underline"
-                href={`/inquiries/${inquiry.id}`}
-              >
-                {inquiry.content}
-              </Link>
-            </TableRowItem>
+                {/* 내용 */}
+                <div className="min-w-0 flex-1">
+                  <Link
+                    href={`/inquiries/${inquiry.id}`}
+                    className="block truncate text-left font-medium text-base hover:underline md:font-normal"
+                  >
+                    {inquiry.content}
+                  </Link>
+                </div>
+              </div>
 
-            {/* 작성일 */}
-            <TableRowItem className="max-w-[150px] text-center">
-              {formatToKoreanDate(inquiry.createdAt)}
-            </TableRowItem>
+              <div className="flex items-center gap-2 whitespace-nowrap text-gray-500 text-sm md:gap-3 md:text-base md:text-black">
+                {/* 작성일 */}
+                <div className="md:w-[150px] md:text-center">
+                  {formatToKoreanDate(inquiry.createdAt)}
+                </div>
+              </div>
+            </div>
 
             {/* 처리 상태 */}
-            <TableRowItem className="max-w-[100px] text-center">
-              {statusLabel[inquiry.status]}
-            </TableRowItem>
-          </TableRow>
+            <div className="flex w-13 shrink-0 items-center justify-center md:w-[100px]">
+              <span className="inline-block whitespace-nowrap rounded-lg bg-gray-100 px-2 py-1 font-semibold text-gray-600 text-sm md:rounded-none md:bg-transparent md:p-0 md:font-normal md:text-base md:text-black">
+                {statusLabel[inquiry.status]}
+              </span>
+            </div>
+          </div>
         ))}
-      </TableBody>
-    </Table>
+      </div>
+    </div>
   );
 }
