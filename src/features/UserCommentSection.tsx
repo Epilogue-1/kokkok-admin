@@ -60,7 +60,7 @@ export default function UserCommentSection({ userId, pageSize = 5 }: Props) {
   const totalPages = total === 0 ? 0 : Math.ceil(total / pageSize);
 
   return (
-    <section className="flex-1">
+    <section className="min-w-0 flex-1">
       <div className="flex items-center gap-3">
         <SubTitle>작성한 댓글</SubTitle>
         {total > -1 && <span className="mb-1 text-primary-600">{total}</span>}
