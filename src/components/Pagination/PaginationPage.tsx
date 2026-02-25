@@ -31,7 +31,7 @@ export default function PaginationPage({
   const activeStyle = "bg-primary-600 font-medium text-white";
   const inactiveStyle = "text-gray-600 hover:bg-gray-100 active:bg-gray-200";
 
-  const bigStyle = "h-8 w-8 mr-3 text-base";
+  const bigStyle = "h-7 w-7 mr-2 text-base md:h-8 md:w-8 md:mr-3 md:text-lg";
   const smallStyle = "h-6 w-6 mr-1 text-sm";
 
   if (as === "link") {
