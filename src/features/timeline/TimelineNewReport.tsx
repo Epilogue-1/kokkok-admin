@@ -40,7 +40,7 @@ export default function TimelineNewReport({
     <div className="flex w-full flex-col">
       <div className="flex gap-5">
         {/* 신고 아이콘 */}
-        <div className="z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-100">
+        <div className="z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-600">
           <TbUrgent className="h-5 w-5 text-white" />
         </div>
 
