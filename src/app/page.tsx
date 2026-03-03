@@ -1,9 +1,13 @@
+import { getDashboardSummary } from "@/api/dashboard.server";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
 import SubTitle from "@/components/SubTitle";
 import StatusSummaryCard from "@/features/StatusSummaryCard";
 
-export default function Home() {
+export default async function Home() {
+  const { data: summary } = await getDashboardSummary();
+  const { reports, inquiries } = summary;
+
   return (
     <>
       <Header />
@@ -14,13 +18,21 @@ export default function Home() {
           <SubTitle>처리 현황</SubTitle>
 
           <div className="flex flex-col gap-2 md:flex-row md:gap-10">
-            <StatusSummaryCard content="신고 미처리" count={3} />
             <StatusSummaryCard
-              content="문의 미처리"
-              isTodayUpdated
-              count={24}
+              content="사용자 신고"
+              isTodayUpdated={reports.user.hasToday}
+              count={reports.user.pendingCount}
             />
-            <StatusSummaryCard content="문의 진행중" count={7} color="blue" />
+            <StatusSummaryCard
+              content="게시글/댓글 신고"
+              isTodayUpdated={reports.content.hasToday}
+              count={reports.content.pendingCount}
+            />
+            <StatusSummaryCard
+              content="문의"
+              isTodayUpdated={inquiries.hasToday}
+              count={inquiries.pendingCount}
+            />
           </div>
         </section>
       </Main>
