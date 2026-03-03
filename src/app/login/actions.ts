@@ -10,9 +10,9 @@ export async function loginAction(formData: FormData) {
   // 폼 내용으로 로그인 시도
   const res = await login(email, password);
 
-  // 로그인 성공 시, 사용자 신고 페이지로 이동
+  // 로그인 성공 시, 홈으로 이동
   if (res.ok) {
-    redirect("/user-reports");
+    redirect("/");
   }
 
   // 로그인 실패 시, 쿼리스트링으로 실패 전달
