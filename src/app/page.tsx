@@ -19,16 +19,19 @@ export default async function Home() {
 
           <div className="flex flex-col gap-2 md:flex-row md:gap-10">
             <StatusSummaryCard
+              href={"/user-reports?status=pending"}
               content="사용자 신고"
               isTodayUpdated={reports.user.hasToday}
               count={reports.user.pendingCount}
             />
             <StatusSummaryCard
+              href={"/content-reports?status=pending"}
               content="게시글/댓글 신고"
               isTodayUpdated={reports.content.hasToday}
               count={reports.content.pendingCount}
             />
             <StatusSummaryCard
+              href={"/inquiries?status=pending"}
               content="문의"
               isTodayUpdated={inquiries.hasToday}
               count={inquiries.pendingCount}

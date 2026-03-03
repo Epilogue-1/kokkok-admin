@@ -1,10 +1,14 @@
+import Link, { type LinkProps } from "next/link";
+
 interface Props {
+  href: LinkProps["href"];
   content: string;
   isTodayUpdated?: boolean;
   count: number;
 }
 
 export default function StatusSummaryCard({
+  href,
   content,
   isTodayUpdated = false,
   count,
@@ -12,7 +16,10 @@ export default function StatusSummaryCard({
   const hasCount = count > 0;
 
   return (
-    <div className="flex min-w-0 flex-1 items-center rounded-lg bg-gray-100 px-7 py-4 md:px-9 md:py-6">
+    <Link
+      className="flex min-w-0 flex-1 items-center rounded-lg bg-gray-100 px-7 py-4 decoration-1 underline-offset-2 hover:underline md:px-9 md:py-6"
+      href={href}
+    >
       {/* 항목 이름 */}
       <span>{content}</span>
 
@@ -31,6 +38,6 @@ export default function StatusSummaryCard({
       >
         {count}
       </span>
-    </div>
+    </Link>
   );
 }
